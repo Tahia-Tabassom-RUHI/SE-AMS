@@ -1,0 +1,203 @@
+You are editing an existing Figma prototype file for the
+SE Academic Management System — MJIIT.
+
+STRICT RULE: Only add what is described in this prompt.
+Do NOT modify any existing page, frame, nav item, or element.
+Only add the new overlay frames described below.
+
+=== CONTEXT ===
+
+On the Course Catalog page, each section row has a pencil
+edit icon in the ACTION column. Clicking it opens a
+Section Details modal. Design the following frames as
+overlay states on top of the Course Catalog page.
+
+=== FRAME 1: SECTION DETAILS MODAL — DEFAULT STATE ===
+
+Background scrim: full width, full height, rgba(0,0,0,0.4)
+
+Modal card:
+  Width: 560px
+  Background: white
+  Border-radius: 12px
+  Padding: 24px
+  Centered on screen
+
+Modal header:
+  Left: "Section Details" — 18px, 500 weight,
+  color: var(--color-text-primary)
+  Right: X close button — ti-x icon, 20px, #6B7280
+
+=== READ-ONLY INFO STRIP ===
+
+Directly below header, a light gray strip:
+  Background: #F9FAFB
+  Border: 0.5px solid #E5E7EB
+  Border-radius: 8px
+  Padding: 10px 14px
+  Margin-bottom: 20px
+  Display: 4 items in a row (space-between):
+    "CS101" — 14px, 500 weight, #7B1A2A
+    "Introduction to Programming" — 14px, #374151
+    "Sec 01" — badge: #F1F5F9 bg, #475569 text,
+    11px, border-radius 4px, padding 2px 7px
+    "3 CR" — 14px, 500 weight, #111827,
+    "CR" in #6B7280 12px
+  Label below each item: "Course Code", "Course Name",
+  "Section", "Credits" — all 11px, #6B7280
+
+=== EDITABLE FIELDS (7 fields, stacked, 16px gap) ===
+
+Label style for all fields:
+  13px, 500 weight, #374151, margin-bottom 6px
+
+Dropdown style for all dropdowns:
+  Full width, height 40px, border 1px solid #E5E7EB,
+  border-radius 6px, padding 0 12px, 14px #111827,
+  chevron-down icon right side (#6B7280)
+
+--- FIELD 1: Prerequisite Course Code ---
+
+Label: "Prerequisite Course Code"
+Dropdown showing: "None" (default selected)
+
+Dropdown options (in this order):
+  None
+  ─────────── (divider)
+  CS101 — Introduction to Programming
+  CS202 — Data Structures
+  CS205 — Algorithms
+  CS301 — Operating Systems
+  CS302 — Computer Networks
+  CS303 — Database Systems
+  CS404 — Software Engineering
+  MA101 — Calculus I
+  MA202 — Linear Algebra
+  ─────────── (divider)
+  Custom...
+
+When "None" is selected: field shows "None" in #6B7280
+When a course is selected: shows course code + name
+in #111827, 14px
+Helper text below: "Select if this course requires
+a prerequisite. Choose Custom to enter a code
+not in the catalog." — 12px, #6B7280
+
+--- FIELD 2: Final Exam ---
+
+Label: "Final Exam"
+Two pill toggle buttons side by side (not a dropdown):
+  [YES]  [NO]
+
+Toggle button style:
+  Each button: width 80px, height 36px, border-radius 6px,
+  font 13px, 500 weight
+  Inactive: white bg, 1px solid #E5E7EB, #374151 text
+  Active YES: #DCFCE7 bg, 1px solid #16A34A, #166534 text
+  Active NO: #FEE2E2 bg, 1px solid #DC2626, #991B1B text
+  Default: neither selected (both show inactive style)
+
+--- FIELD 3: Combined Lecture ---
+
+Label: "Combined Lecture"
+Same YES/NO pill toggle style as Field 2
+Helper text below: "YES if multiple sections share
+the same lecture session." — 12px, #6B7280
+  Active YES: #DBEAFE bg, 1px solid #2563EB, #1E40AF text
+  Active NO: white bg, 1px solid #E5E7EB, #374151 text
+
+--- FIELDS 4, 5, 6: Hours fields (3 columns side by side) ---
+
+Layout: 3 equal-width columns in one row, 12px gap
+
+FIELD 4 — Lecture Hours:
+  Label: "Lecture Hours"
+  Dropdown options:
+    Select...
+    ─────────
+    1 hour
+    2 hours
+    3 hours
+    ─────────
+    Custom...
+  Width: fills column
+
+FIELD 5 — Tutorial Hours:
+  Label: "Tutorial Hours"
+  Dropdown options:
+    Select...
+    ─────────
+    0 hours
+    1 hour
+    2 hours
+    ─────────
+    Custom...
+
+FIELD 6 — Lab Hours:
+  Label: "Lab Hours"
+  Dropdown options:
+    Select...
+    ─────────
+    0 hours
+    1 hour
+    2 hours
+    3 hours
+    ─────────
+    Custom...
+
+=== MODAL FOOTER ===
+
+Margin-top: 24px, right-aligned, 12px gap:
+  Button 1: "Cancel"
+    White bg, 1px border #E5E7EB, #374151 text,
+    14px, 500 weight, border-radius 6px, padding 10px 16px
+  Button 2: "Save Section Details"
+    #7B1A2A bg, white text, 14px, 500 weight,
+    border-radius 6px, padding 10px 20px
+
+=== FRAME 2: CUSTOM INPUT STATE (hours field) ===
+
+Identical to Frame 1 EXCEPT show this state for the
+Lecture Hours field only:
+
+The Lecture Hours dropdown shows "Custom..." as selected.
+Directly below the Lecture Hours dropdown, add:
+  A text input field:
+    Width: fills column
+    Height: 36px
+    Border: 1px solid #7B1A2A (maroon — active state)
+    Border-radius: 6px
+    Placeholder: "e.g. 1.5"
+    Font: 14px, #111827
+  Helper text below the input:
+    "Enter a custom value (e.g. 1.5)" — 12px, #6B7280
+
+Tutorial Hours and Lab Hours remain on "Select..." in this frame.
+
+=== FRAME 3: CUSTOM INPUT STATE (prerequisite field) ===
+
+Identical to Frame 1 EXCEPT show this state for the
+Prerequisite Course Code field only:
+
+The Prerequisite dropdown shows "Custom..." as selected.
+Directly below the dropdown, add:
+  A text input:
+    Full width, height 40px
+    Border: 1px solid #7B1A2A (maroon — active)
+    Border-radius: 6px
+    Placeholder: "Enter course code e.g. SCSE1234"
+    Font: 14px, #111827
+  Helper text: "Use this for courses outside the
+  current catalog." — 12px, #6B7280
+
+=== FRAME 4: COMPLETED/FILLED STATE ===
+
+Show all fields filled in as an example:
+
+Prerequisite: "CS101 — Introduction to Programming"
+Final Exam: YES selected (green)
+Combined Lecture: NO selected
+Lecture Hours: "3 hours" selected
+Tutorial Hours: "1 hour" selected
+Lab Hours: "0 hours" selected
+Save Section Details button: active maroon (unchanged)

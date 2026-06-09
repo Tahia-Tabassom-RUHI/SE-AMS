@@ -1,0 +1,145 @@
+Design a new page called "System Audit" for the SE Academic Management System — MJIIT prototype. 
+This must exactly match the existing design language used across all other pages in this file.
+
+=== DESIGN SYSTEM (match exactly) ===
+- Top header bar: dark maroon (#7B1A2A), full width, 64px tall
+  - Left: UTM logo + "SE Academic Management System — MJIIT" in white, 13px
+  - Right: bell icon, user avatar circle (initials "ZA"), "Zatul Alwani", "Coordinator" label, dropdown arrow — all white
+- Left sidebar: white, 210px wide, full height, 0.5px right border (#E0E0E0)
+  - Navigation items: 40px tall each, 16px left padding, 14px Inter Regular
+  - Inactive: dark gray text (#374151), gray icon left
+  - Active: light pink/red background (#FEF2F2), 3px left maroon border (#7B1A2A), maroon text and icon
+  - Nav icons: 18px, Tabler outline style
+- Main content area: light gray background (#F9FAFB), left padding 48px, top padding 32px
+- Page title: 28px Inter Medium, #111827
+- Page subtitle: 14px Inter Regular, #6B7280, 6px below title
+- Section/stat cards: white bg, 1px border #E5E7EB, border-radius 8px, padding 20px 24px
+- Stats row: 4 cards in a row, each showing a muted 13px label and a large 24px number
+- Table: white bg, 1px border #E5E7EB, border-radius 8px
+  - Header row: #F9FAFB bg, 12px uppercase label, #6B7280, 600 weight
+  - Data rows: 56px tall, 16px horizontal padding, bottom border #F3F4F6
+  - Row hover: #F9FAFB
+- Status badges (pill shape, border-radius 20px, 11px font, 600 weight):
+  - Accepted/Active: #DCFCE7 bg, #166534 text
+  - Pending: #FEF9C3 bg, #854D0E text  
+  - Rejected: #FEE2E2 bg, #991B1B text
+  - Research: #EDE9FE bg, #5B21B6 text
+  - Grant: #FEF9C3 bg, #854D0E text
+  - Service: #DCFCE7 bg, #166534 text
+- Tab bar (below page title): underline style, 14px Inter Medium
+  - Active tab: maroon underline (#7B1A2A) 2px, maroon text
+  - Inactive tab: #6B7280 text, no underline, hover darkens
+
+=== NAVIGATION SIDEBAR CHANGE ===
+Remove these two items from the sidebar:
+- "Assignment Status Board"
+- "Staff Activity Tracker"
+
+Add one new item in their place (position it where "Assignment Status Board" was):
+- Icon: shield-check (Tabler outline)
+- Label: "System Audit"
+- Active state: maroon, same as all other active nav items
+
+Final nav order (top to bottom):
+1. Dashboard
+2. My Queue
+3. My Courses
+4. My Activity Tracker
+5. Course & Moderator Manager
+6. Student Segmentation
+7. Lab Resource Planner
+8. Assignment Tool
+9. System Audit  ← new
+10. Export Reports
+
+=== SYSTEM AUDIT PAGE LAYOUT ===
+
+Page title: "System Audit"
+Subtitle: "Monitor assignments, staff activities, and system-level action logs"
+
+Tab bar with 3 tabs (underline style, matching design system):
+[Assignment Log] [Staff Activities] [Audit Trail]
+
+--- TAB 1: Assignment Log (default active) ---
+
+4 stat cards in a row:
+- "Accepted" → large green number "03"
+- "Pending" → large orange number "02"  
+- "Rejected" → large red number "02"
+- "Total Credits Assigned" → large maroon number "9"
+
+Table columns: LECTURER NAME | COURSE & SECTION | CREDITS | STATUS | SENT DATE
+
+Sample rows (7 rows):
+Row 1: Dr. Aisyah Rahman | CS101 - 01 / Introduction to Programming | 3 | Accepted badge | Apr 20 / Response: Apr 21
+Row 2: Dr. Aisyah Rahman | CS202 - 01 / Data Structures | 3 | Pending badge | Apr 26
+Row 3: Prof. Muhammad Ali | CS303 - 01 / Database Systems | 3 | Accepted badge | Apr 18 / Response: Apr 19
+Row 4: Dr. Ahmad Hassan [Exempt pill — #FEF9C3 bg, #854D0E text] | MA101 - 02 / Calculus I | 4 | Rejected badge + info icon | Apr 15 / Response: Apr 16
+Row 5: Dr. Siti Aminah | CS205 - 01 / Algorithms | 3 | Accepted badge | Apr 22 / Response: Apr 23
+Row 6: Dr. Noor Hayati | CS404 - 01 / Software Engineering | 3 | Rejected badge + info icon | Apr 19 / Response: Apr 20
+Row 7: Dr. Fatimah Zahra | CS301 - 01 / Operating Systems | 3 | Pending badge | Apr 27
+
+--- TAB 2: Staff Activities ---
+
+4 stat cards in a row:
+- "Total Activities" → "9" in #111827
+- "Research Projects" → "3" in #5B21B6 (purple)
+- "Active Grants" → "2" in #854D0E (amber)
+- "Total Hours" → "685" in #111827
+
+Table columns: TITLE | TYPE | HOURS SPENT | MODE | STAFF NAME | DATE
+
+Sample rows (7 rows):
+Row 1: MJIIT Robotics Seminar | Service badge | 40 Hours | Hybrid | Dr. Aisyah Rahman | Apr 15, 2026
+Row 2: Machine Learning in Education Research | Research badge | 120 Hours | Hybrid | Dr. Aisyah Rahman | Mar 20, 2026
+Row 3: NSF Database Optimization Grant | Grant badge | 80 Hours | Hybrid | Prof. Muhammad Ali | Apr 10, 2026
+Row 4: AI Ethics Committee | Service badge | 20 Hours | Hybrid | Dr. Siti Aminah | Apr 22, 2026
+Row 5: Distributed Systems Performance Analysis | Research badge | 150 Hours | Hybrid | Prof. Muhammad Ali | Feb 28, 2026
+Row 6: Ministry of Education Curriculum Review | Service badge | 60 Hours | Hybrid | Dr. Fatimah Zahra | Apr 5, 2026
+Row 7: Deep Learning for Software Engineering Research | Research badge | 120 Hours | Hybrid | Dr. Zatul Alwani | Mar 15, 2026
+
+--- TAB 3: Audit Trail ---
+
+Subtitle text below the tab bar (italic, #6B7280, 13px):
+"Records all system actions per NFR-01 — assignments, exports, activity entries, and status changes are logged with timestamp, user, action type, and IP address."
+
+Filter row (inline, horizontal, matching the filter style from My Activity Tracker page):
+- Dropdown: "All Action Types" (options: Assignment, Export, Activity Entry, Status Change, Login)
+- Dropdown: "All Users"
+- Date range: "From Date" input | "To Date" input
+- Button: "Clear Filters" — ghost style, maroon text
+
+4 stat cards in a row:
+- "Total Actions" → "47" in #111827
+- "Today" → "6" in #185FA5 (blue)
+- "This Week" → "18" in #111827
+- "Unique Users" → "8" in #111827
+
+Table columns: TIMESTAMP | USER | ACTION TYPE | DETAILS | IP ADDRESS
+
+Action type badges (pill shape, same size as other badges):
+- Assignment: #DBEAFE bg, #1E40AF text
+- Export: #F3E8FF bg, #6B21A8 text
+- Activity Entry: #DCFCE7 bg, #166534 text
+- Status Change: #FEF9C3 bg, #854D0E text
+- Login: #F1F5F9 bg, #475569 text
+
+Sample rows (8 rows, newest first):
+Row 1: Jun 7, 2026 09:42 AM | Dr. Zatul Alwani (Coordinator) | Assignment badge | Assigned CS101-01 to Dr. Aisyah Rahman | 192.168.1.10
+Row 2: Jun 7, 2026 09:35 AM | Dr. Zatul Alwani (Coordinator) | Status Change badge | Activated On Leave for Dr. Noor Hayati (Jun 10–Jun 30) | 192.168.1.10
+Row 3: Jun 7, 2026 09:18 AM | Dr. Aisyah Rahman | Activity Entry badge | Added: Deep Learning for SE Research (120 hrs) | 192.168.1.42
+Row 4: Jun 6, 2026 04:55 PM | Dr. Zatul Alwani (Coordinator) | Export badge | Generated ESE Legacy Excel Export — All Sheets | 192.168.1.10
+Row 5: Jun 6, 2026 03:30 PM | Prof. Muhammad Ali | Activity Entry badge | Added: NSF Database Optimization Grant (80 hrs) | 192.168.1.55
+Row 6: Jun 6, 2026 02:14 PM | Dr. Zatul Alwani (Coordinator) | Assignment badge | Assigned CS303-01 to Prof. Muhammad Ali | 192.168.1.10
+Row 7: Jun 6, 2026 08:45 AM | Dr. Noor Hayati | Login badge | Logged in (Role: Lecturer) | 192.168.1.78
+Row 8: Jun 5, 2026 11:20 AM | Dr. Zatul Alwani (Coordinator) | Status Change badge | Set Adjunct status for Dr. Ahmad Hassan | 192.168.1.10
+
+IP address column: monospace font (#6B7280), 13px
+
+=== IMPORTANT CONSTRAINTS ===
+- Do NOT modify any other page in the file
+- Do NOT change any existing component, color, or spacing used elsewhere
+- The System Audit page must feel like a native part of the existing design, not a new screen
+- All three tabs must be visible on the tab bar even when one is active
+- Keep the same left sidebar width (210px) and header height (64px) as every other page
+- The active nav item in the sidebar must be "System Audit" when on this page

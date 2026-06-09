@@ -1,0 +1,105 @@
+You are editing an existing Figma prototype file for the
+SE Academic Management System — MJIIT.
+
+STRICT RULE: Only do exactly what is described in this prompt.
+Do NOT modify, move, restyle, or touch any other page, frame,
+component, nav item, or element in this file.
+Only modify the Student Segmentation page as described below.
+
+=== WHAT THE STUDENT SEGMENTATION PAGE CURRENTLY HAS ===
+
+- 4 stat cards in a row: 
+  Total Students (228) | International (32.0%) | 
+  Local (68.0%) | Year 1-4 (65, 52, 48, 38)
+- A table with columns:
+  COURSE CODE | COURSE NAME | INTERNATIONAL | LOCAL | 
+  TOTAL | DISTRIBUTION
+
+=== CHANGE 1: ADD INTAKE TYPE STAT CARDS ROW ===
+
+Directly below the existing 4 stat cards row, add a new row
+containing exactly 2 stat cards side by side:
+
+Card 1 — Normal Intake:
+  Label: "Normal Intake" — 13px, #6B7280
+  Number: "183" — 24px, 600 weight, #111827
+  Subtext: "Standard admission route" — 13px, #6B7280
+  Left accent border: 3px solid #7B1A2A (maroon)
+  Style: white bg, 1px border #E5E7EB, border-radius 8px,
+  padding 20px 24px
+  Width: same as each of the existing stat cards
+
+Card 2 — Direct Intake:
+  Label: "Direct Intake" — 13px, #6B7280
+  Number: "45" — 24px, 600 weight, #111827
+  Subtext: "Advanced standing / diploma entry" — 13px, #6B7280
+  Left accent border: 3px solid #185FA5 (blue)
+  Style: white bg, 1px border #E5E7EB, border-radius 8px,
+  padding 20px 24px
+  Width: same as Normal Intake card
+
+The two cards sit on the left side of the row.
+The right side of the row is empty.
+Gap between the two cards: 16px — same gap as the existing
+stat cards above.
+
+=== CHANGE 2: ADD INTAKE TYPE FILTER TABS ABOVE TABLE ===
+
+Directly above the existing table, add a filter tab row.
+Style these filter tabs to exactly match the Year filter tabs
+already on the Lab Resource Planner page in this file
+(pill-shaped toggle buttons, same size, same font, same colors).
+
+4 tabs in this row:
+  [All] — shown as active (maroon filled, white text)
+  [Normal Intake]
+  [Direct Intake]
+
+Place this filter row in the same position as the search/filter
+area on other pages — between the stat cards and the table.
+
+=== CHANGE 3: ADD TWO NEW COLUMNS TO THE TABLE ===
+
+Add exactly 2 new columns to the existing table, inserted
+between the "TOTAL" column and the "DISTRIBUTION" column:
+
+New column 1: "NORMAL"
+New column 2: "DIRECT"
+
+Both new column headers: same style as all existing table
+headers (#F9FAFB bg, 12px, 500 weight, #6B7280, uppercase)
+
+Column widths: 100px each, center-aligned
+
+Updated full column order:
+  COURSE CODE | COURSE NAME | INTERNATIONAL | LOCAL | 
+  TOTAL | NORMAL | DIRECT | DISTRIBUTION
+
+Sample data for the new NORMAL and DIRECT columns
+(all other existing column values remain unchanged):
+
+  CS101 | Introduction to Programming  | NORMAL: 35 | DIRECT: 10
+  CS202 | Data Structures              | NORMAL: 30 | DIRECT: 8
+  CS303 | Database Systems             | NORMAL: 28 | DIRECT: 7
+  CS404 | Software Engineering         | NORMAL: 22 | DIRECT: 6
+  MA101 | Calculus I                   | NORMAL: 40 | DIRECT: 10
+  CS205 | Algorithms                   | NORMAL: 26 | DIRECT: 6
+
+NORMAL column cell styling:
+  Number: #111827, 14px, 400 weight
+  Center-aligned
+
+DIRECT column cell styling:
+  Number: #185FA5 (blue), 14px, 400 weight
+  Center-aligned
+
+Do not change the DISTRIBUTION column — keep it exactly as is,
+same bar visualization, same position, just shifted right.
+
+=== DO NOT CHANGE ===
+- The existing 4 stat cards (Total Students, International,
+  Local, Year 1-4) — leave them completely untouched
+- The existing table columns (Course Code, Course Name,
+  International, Local, Total, Distribution)
+- The page title, subtitle, nav item, header bar, or sidebar
+- Any other page in the file

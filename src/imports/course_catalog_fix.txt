@@ -1,0 +1,120 @@
+You are editing an existing Figma prototype file for the
+SE Academic Management System — MJIIT.
+
+STRICT RULE: Only do what is described below.
+Do NOT modify any other page or element in this file.
+
+=== CONTEXT ===
+
+The Course Catalog page has 3 unassigned section rows,
+each with an "Assign →" button:
+  1. CS101 Sec 02 — Introduction to Programming
+  2. CS301 Sec 01 — Operating Systems
+  3. MA202 Sec 01 — Linear Algebra
+
+Currently clicking "Assign →" shows a toast popup.
+This is wrong. Remove that behavior entirely.
+
+Instead, each "Assign →" button must navigate to a
+dedicated Assignment Tool frame where the course section
+is already pre-filled.
+
+=== CREATE 3 NEW FRAMES ===
+
+Duplicate the existing Assignment Tool — Assign Lecturer
+tab frame exactly 3 times.
+
+Name them:
+  "Assignment Tool — CS101 Sec 02"
+  "Assignment Tool — CS301 Sec 01"
+  "Assignment Tool — MA202 Sec 01"
+
+Each frame is identical to the existing Assignment Tool
+Assign Lecturer tab EXCEPT for the changes below.
+
+=== FRAME 1: Assignment Tool — CS101 Sec 02 ===
+
+"Select Course Section" field:
+  Change from empty placeholder to pre-filled state.
+  Show the dropdown as CLOSED with the selected value:
+  "CS101 — Introduction to Programming, Sec 02"
+  Text: #111827, 14px, same style as other filled dropdowns
+  in this file
+
+Below the course section field, add a small info strip:
+  Background: #F9FAFB
+  Border: 0.5px solid #E5E7EB
+  Border-radius: 6px
+  Padding: 8px 12px
+  Display: 3 items in a row with 24px gap:
+    "Sec 02" — badge (#F1F5F9 bg, #475569 text, 11px)
+    "Y1" — badge (#EDE9FE bg, #5B21B6 text, 11px)
+    "👥 42 students" — 12px, #6B7280
+
+"Assign to Lecturer" dropdown: unchanged, still shows
+"Select a lecturer..." placeholder — coordinator needs
+to choose this
+
+"Send Assignment" button: still disabled (grayed out)
+since lecturer not yet selected
+
+Everything else on the frame: unchanged
+
+=== FRAME 2: Assignment Tool — CS301 Sec 01 ===
+
+Identical to Frame 1 EXCEPT:
+
+"Select Course Section" pre-filled value:
+  "CS301 — Operating Systems, Sec 01"
+
+Info strip:
+  "Sec 01" | "Y3" (green badge: #EAF3DE bg, #3B6D11 text)
+  | "👥 48 students"
+
+=== FRAME 3: Assignment Tool — MA202 Sec 01 ===
+
+Identical to Frame 1 EXCEPT:
+
+"Select Course Section" pre-filled value:
+  "MA202 — Linear Algebra, Sec 01"
+
+Info strip:
+  "Sec 01" | "Y2" (purple badge: #EDE9FE bg, #5B21B6 text)
+  | "👥 42 students"
+
+=== PROTOTYPE CONNECTIONS ===
+
+On the Course Catalog page (All tab frame):
+
+  "Assign →" button on CS101 Sec 02 row:
+    Remove existing interaction (the toast popup)
+    Add: On Click → Navigate to
+    "Assignment Tool — CS101 Sec 02"
+    Transition: Instant
+
+  "Assign →" button on CS301 Sec 01 row:
+    Remove existing interaction
+    Add: On Click → Navigate to
+    "Assignment Tool — CS301 Sec 01"
+    Transition: Instant
+
+  "Assign →" button on MA202 Sec 01 row:
+    Remove existing interaction
+    Add: On Click → Navigate to
+    "Assignment Tool — MA202 Sec 01"
+    Transition: Instant
+
+On each of the 3 new Assignment Tool frames,
+add a back navigation:
+
+  The page subtitle text currently says:
+  "Select a course section and assign it to a lecturer.
+  Use Course Catalog to browse all unassigned sections."
+
+  Make "Course Catalog" text in the subtitle a clickable
+  link — underlined, #7B1A2A color.
+  On Click → Navigate back to Course Catalog page
+  Transition: Instant
+
+Do not change any other connections, frames,
+or elements in this file.

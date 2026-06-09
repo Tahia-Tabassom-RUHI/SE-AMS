@@ -1,0 +1,113 @@
+You are editing an existing Figma prototype file for the
+SE Academic Management System — MJIIT.
+
+STRICT RULE: Only do what is described below.
+Do NOT modify any other page or element in this file.
+
+=== CONTEXT ===
+
+The Student Segmentation page has 3 filter tabs:
+[All] [Normal Intake] [Direct Intake]
+
+Currently all three tabs show identical data.
+You need to create 2 additional frames showing different
+data states for Normal Intake and Direct Intake tabs.
+Then connect them with prototype click interactions.
+
+=== FRAME 1: NORMAL INTAKE TAB STATE ===
+
+Duplicate the existing Student Segmentation page frame.
+Name it: "Student Segmentation — Normal Intake"
+
+Changes from the original:
+
+Tab bar: "Normal Intake" is active (maroon filled, white text)
+"All" and "Direct Intake" show as inactive.
+
+Intake stat cards row:
+  Normal Intake card: bold border, number stays 183
+  Direct Intake card: unchanged
+
+Table data — update these columns only
+(INTERNATIONAL, LOCAL, TOTAL stay showing Normal intake
+students only. NORMAL column becomes bold/highlighted.
+DIRECT column grays out — #9CA3AF color):
+
+  CS101  | Intl: 11 | Local: 24 | Total: 35 | Normal: 35 | Direct: — | 69% local 31% intl
+  CS202  | Intl: 9  | Local: 21 | Total: 30 | Normal: 30 | Direct: — | 70% local 30% intl
+  CS303  | Intl: 8  | Local: 20 | Total: 28 | Normal: 28 | Direct: — | 71% local 29% intl
+  CS404  | Intl: 6  | Local: 16 | Total: 22 | Normal: 22 | Direct: — | 73% local 27% intl
+  MA101  | Intl: 14 | Local: 26 | Total: 40 | Normal: 40 | Direct: — | 65% local 35% intl
+  CS205  | Intl: 8  | Local: 18 | Total: 26 | Normal: 26 | Direct: — | 69% local 31% intl
+
+DIRECT column cells: show "—" in #9CA3AF (grayed out)
+NORMAL column header: bold, #111827 (emphasised)
+NORMAL column values: #111827, 14px, 500 weight (bold)
+
+Summary stat cards update:
+  Total Students card: show "183"
+  International card: show "56 students / 31.0%"
+  Local card: show "127 students / 69.0%"
+  Year 1-4 card: stays the same
+
+=== FRAME 2: DIRECT INTAKE TAB STATE ===
+
+Duplicate the existing Student Segmentation page frame.
+Name it: "Student Segmentation — Direct Intake"
+
+Changes from the original:
+
+Tab bar: "Direct Intake" is active (maroon filled, white text)
+"All" and "Normal Intake" show as inactive.
+
+Table data — update these columns only:
+
+  CS101  | Intl: 4  | Local: 6  | Total: 10 | Normal: — | Direct: 10 | 60% local 40% intl
+  CS202  | Intl: 3  | Local: 5  | Total: 8  | Normal: — | Direct: 8  | 63% local 38% intl
+  CS303  | Intl: 2  | Local: 5  | Total: 7  | Normal: — | Direct: 7  | 71% local 29% intl
+  CS404  | Intl: 2  | Local: 4  | Total: 6  | Normal: — | Direct: 6  | 67% local 33% intl
+  MA101  | Intl: 4  | Local: 6  | Total: 10 | Normal: — | Direct: 10 | 60% local 40% intl
+  CS205  | Intl: 2  | Local: 4  | Total: 6  | Normal: — | Direct: 6  | 67% local 33% intl
+
+NORMAL column cells: show "—" in #9CA3AF (grayed out)
+DIRECT column header: bold, #185FA5 (blue, emphasised)
+DIRECT column values: #185FA5, 14px, 500 weight (bold)
+
+Summary stat cards update:
+  Total Students card: show "45"
+  International card: show "17 students / 38.0%"
+  Local card: show "30 students / 62.0%" (blue text)
+  Year 1-4 card: stays the same
+
+=== PROTOTYPE CONNECTIONS ===
+
+Add click interactions between the three frames:
+
+On the ORIGINAL frame (All tab active):
+  Click "Normal Intake" tab button
+  → Navigate to "Student Segmentation — Normal Intake" frame
+  Transition: Instant
+
+  Click "Direct Intake" tab button
+  → Navigate to "Student Segmentation — Direct Intake" frame
+  Transition: Instant
+
+On "Student Segmentation — Normal Intake" frame:
+  Click "All" tab button
+  → Navigate to original Student Segmentation frame
+  Transition: Instant
+
+  Click "Direct Intake" tab button
+  → Navigate to "Student Segmentation — Direct Intake" frame
+  Transition: Instant
+
+On "Student Segmentation — Direct Intake" frame:
+  Click "All" tab button
+  → Navigate to original Student Segmentation frame
+  Transition: Instant
+
+  Click "Normal Intake" tab button
+  → Navigate to "Student Segmentation — Normal Intake" frame
+  Transition: Instant
+
+Do not change any other page or element in this file.

@@ -1,0 +1,22 @@
+You are editing an existing Figma prototype file for the
+SE Academic Management System — MJIIT.
+
+STRICT RULE: Only change what is described below.
+Do NOT modify any other page, frame, or element in this file.
+
+=== CHANGE: COURSE & MODERATOR MANAGER ACTIONS COLUMN ===
+
+The ACTIONS column in the Course & Moderator Manager table
+currently has two icons per row:
+  1. Pencil/edit icon (ti-edit) — labelled "Edit course details"
+  2. Comment/message icon (ti-message)
+
+Remove the pencil/edit icon (ti-edit) from every row in
+the ACTIONS column entirely.
+
+Keep only the comment/message icon (ti-message) in the
+ACTIONS column. It must remain in the same position.
+
+Do not change the column header, column width, or any
+other column in the table. Do not change any other element
+on this page.

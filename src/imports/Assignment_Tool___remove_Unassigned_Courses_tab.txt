@@ -1,0 +1,30 @@
+You are editing an existing Figma prototype file for the
+SE Academic Management System — MJIIT.
+
+STRICT RULE: Only change what is described below.
+Do NOT modify any other page, frame, or element in this file.
+
+=== CHANGE: ASSIGNMENT TOOL TAB BAR ===
+
+The Assignment Tool page currently has 3 tabs:
+  [Unassigned Courses] [Assign Lecturer] [Staff Leave & Status]
+
+Remove the "Unassigned Courses" tab entirely.
+
+The tab bar after this change must show only 2 tabs:
+  [Assign Lecturer] [Staff Leave & Status]
+
+"Assign Lecturer" becomes the default active tab
+(maroon underline, maroon text) since it is now the first tab.
+
+Update the helper text below the tab bar on the
+Assign Lecturer tab. Find the current text:
+  "Select a course below to automatically load it into
+  the Assign Lecturer tab"
+Replace with:
+  "Select a course section and assign it to a lecturer.
+  Use Course Catalog to browse all unassigned sections."
+
+Do not change anything else on this page — not the
+Assign Lecturer form, not the Staff Leave & Status content,
+not the sidebar, not the header.

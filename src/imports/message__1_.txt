@@ -1,0 +1,250 @@
+You are editing an existing Figma prototype file for the 
+SE Academic Management System — MJIIT.
+
+STRICT RULE: Only do exactly what is described in this prompt. 
+Do NOT modify, move, reorder, restyle, or touch any existing 
+page, frame, component, nav item, text, color, spacing, or 
+layout that already exists in this file. If something is not 
+explicitly mentioned in this prompt, leave it completely 
+untouched.
+
+=== TASK 1: ADD ONE NAV ITEM TO THE SIDEBAR ===
+
+The left sidebar currently has these nav items in this exact order:
+1. Dashboard
+2. My Queue
+3. My Courses
+4. My Activity Tracker
+5. Course & Moderator Manager
+6. Student Segmentation
+7. Lab Resource Planner
+8. Assignment Tool
+9. System Audit
+10. Export Reports
+
+Insert one new nav item called "Course Catalog" at position 8,
+pushing Assignment Tool to position 9, System Audit to position 10,
+and Export Reports to position 11.
+
+The new nav item must:
+- Use icon: ti-books (Tabler outline, same 18px size as all other icons)
+- Use identical styling to all other inactive nav items
+  (same font, same size, same color, same padding, same height)
+- Show as the ACTIVE state (maroon left border, light pink background,
+  maroon text and icon) only on the Course Catalog page itself
+- Show as inactive on all other pages — do not change the active
+  state on any existing page
+
+Do NOT reorder, restyle, or move any of the 10 existing nav items.
+Only insert the new one between Lab Resource Planner and 
+Assignment Tool.
+
+=== TASK 2: CREATE ONE NEW PAGE ===
+
+Create a new Figma page/frame called "Course Catalog" that matches
+the visual design of the existing pages exactly:
+- Same top header bar (dark maroon, UTM logo, "Zatul Alwani /
+  Coordinator" on right, bell icon)
+- Same left sidebar with Course Catalog shown as the active nav item
+- Same light gray main content background (#F9FAFB)
+- Same font, same spacing, same card style as all other pages
+
+=== PAGE CONTENT ===
+
+Page title: "Course Catalog"
+Font: 28px, 500 weight, #111827 — same as all other page titles
+
+Page subtitle directly below title:
+"Define and manage courses referenced across all sections
+and assignments"
+Font: 14px, 400 weight, #6B7280 — same as all other subtitles
+
+Top action row (space-between layout):
+- Left side: empty
+- Right side: one button "+ Add New Course"
+  Style: maroon filled background (#7B1A2A), white text, 14px,
+  500 weight, border-radius 6px, padding 10px 16px
+  Match the exact button style used on other pages in this file
+
+=== MAIN TABLE ===
+
+White card container:
+  Background: white
+  Border: 1px solid #E5E7EB
+  Border-radius: 8px
+  Width: full content width
+
+Table header row:
+  Background: #F9FAFB
+  Height: 44px
+  Border-bottom: 1px solid #E5E7EB
+  Text: 12px, 500 weight, #6B7280, uppercase, letter-spacing 0.05em
+
+4 columns ONLY — exactly these headers, no others:
+  COURSE CODE | COURSE NAME | CREDITS | ACTIONS
+
+Column widths:
+  COURSE CODE: 160px
+  COURSE NAME: flexible, fills remaining space
+  CREDITS: 100px, center-aligned
+  ACTIONS: 100px, center-aligned
+
+Table data rows (9 rows):
+  Each row: 56px height, border-bottom 1px solid #F3F4F6
+
+  Row data:
+  CS101  | Introduction to Programming  | 3 CR | [edit] [delete]
+  CS202  | Data Structures              | 3 CR | [edit] [delete]
+  CS205  | Algorithms                   | 3 CR | [edit] [delete]
+  CS301  | Operating Systems            | 3 CR | [edit] [delete]
+  CS302  | Computer Networks            | 3 CR | [edit] [delete]
+  CS303  | Database Systems             | 3 CR | [edit] [delete]
+  CS404  | Software Engineering         | 3 CR | [edit] [delete]
+  MA101  | Calculus I                   | 4 CR | [edit] [delete]
+  MA202  | Linear Algebra               | 3 CR | [edit] [delete]
+
+COURSE CODE cell styling:
+  Text: #7B1A2A (maroon), 14px, 500 weight
+
+COURSE NAME cell styling:
+  Text: #111827, 14px, 400 weight
+
+CREDITS cell styling:
+  Number: #111827, 14px, 500 weight
+  "CR" suffix: #6B7280, 13px, 400 weight
+  Center-aligned
+
+ACTIONS cell:
+  Two icons side by side, 16px gap:
+  1. Pencil/edit icon (ti-edit): #6B7280, 18px
+  2. Trash/delete icon (ti-trash): #6B7280, 18px
+
+=== FRAME 1: ADD NEW COURSE MODAL ===
+
+Design as a separate overlay frame positioned on top of the
+Course Catalog page.
+
+Background scrim: full-width, full-height, rgba(0,0,0,0.4)
+
+Modal card:
+  Width: 480px
+  Background: white
+  Border-radius: 12px
+  Padding: 24px
+  Centered on screen
+
+Modal header:
+  Left: "Add New Course" — 18px, 500 weight, #111827
+  Right: X close button — ti-x icon, 20px, #6B7280
+
+3 form fields stacked, 20px vertical gap between each:
+
+FIELD 1 — Course Code:
+  Label: "Course Code *" — 13px, 500 weight, #374151,
+  margin-bottom 6px
+  Input: full-width text field,
+  placeholder "e.g. CS101",
+  height 40px, border 1px solid #E5E7EB, border-radius 6px,
+  padding 0 12px, font 14px #111827
+  Helper text below (8px gap):
+  "Must be unique. Duplicate codes will be blocked."
+  13px, #6B7280
+
+FIELD 2 — Course Name:
+  Label: "Course Name *" — same label style as Field 1
+  Input: same input style, placeholder "e.g. Introduction to 
+  Programming"
+  No helper text
+
+FIELD 3 — Credit Value:
+  Label: "Credit Value *" — same label style
+  Input: same input style but narrower (120px wide),
+  placeholder "3", type number
+  Helper text below:
+  "Used for teaching load calculations."
+  13px, #6B7280
+
+Modal footer (margin-top 24px, right-aligned, 12px gap):
+  Button 1: "Cancel"
+    Background: white, border: 1px solid #E5E7EB,
+    text: #374151, 14px, 500 weight
+    Border-radius 6px, padding 10px 16px
+  Button 2: "Save Course"
+    Background: #7B1A2A, text: white, 14px, 500 weight
+    Border-radius 6px, padding 10px 20px
+
+=== FRAME 2: ADD MODAL — DUPLICATE ENTRY ERROR STATE ===
+
+Design as a second overlay frame. Everything is identical to
+Frame 1 (Add New Course modal) EXCEPT:
+
+- Modal title remains: "Add New Course"
+- Course Code input has border: 1px solid #DC2626 (red border)
+- Directly below the Course Code input field, insert this error 
+  banner before the helper text:
+    Background: #FEE2E2
+    Border-left: 3px solid #DC2626
+    Border-radius: 4px
+    Padding: 8px 12px
+    Margin-bottom: 4px
+    Text: "Duplicate Entry — this course code already exists."
+    13px, 500 weight, #991B1B
+- All other fields and buttons remain unchanged
+
+=== FRAME 3: EDIT COURSE MODAL — DEFAULT STATE ===
+
+Design as a third overlay frame. Everything is identical to
+Frame 1 (Add New Course modal) EXCEPT:
+
+- Modal title: "Edit Course" — 18px, 500 weight, #111827
+- All 3 fields are pre-filled with existing values:
+    Course Code input value: "CS303"
+    Course Name input value: "Database Systems"
+    Credit Value input value: "3"
+- All inputs show pre-filled text in #111827, 14px
+- Save button text: "Save Changes" (not "Save Course")
+- Cancel button unchanged
+
+=== FRAME 4: EDIT MODAL — DUPLICATE ENTRY ERROR STATE ===
+
+Design as a fourth overlay frame. Everything is identical to
+Frame 3 (Edit Course modal with pre-filled values) EXCEPT:
+
+- Modal title remains: "Edit Course"
+- All 3 fields remain pre-filled (CS303 / Database Systems / 3)
+- Course Code input has border: 1px solid #DC2626 (red border)
+- Directly below the Course Code input field, insert this error
+  banner before the helper text:
+    Background: #FEE2E2
+    Border-left: 3px solid #DC2626
+    Border-radius: 4px
+    Padding: 8px 12px
+    Margin-bottom: 4px
+    Text: "Duplicate Entry — this course code already exists."
+    13px, 500 weight, #991B1B
+- Save button text remains: "Save Changes"
+- All other fields and buttons remain unchanged
+
+=== FRAME 5: DELETE HARD BLOCK ERROR STATE ===
+
+Design as a separate page frame (not a modal) showing the
+Course Catalog page in its delete-blocked state.
+
+Everything on the page is identical to the base Course Catalog
+page EXCEPT: insert this inline banner directly below the page
+subtitle and above the top action row:
+
+  Full content width
+  Background: #FEE2E2
+  Border: 1px solid #FCA5A5
+  Border-radius: 8px
+  Padding: 12px 16px
+
+  Left icon: ti-circle-x, 18px, #DC2626
+  Text (12px gap from icon):
+  "Course is in use and cannot be deleted."
+  14px, 500 weight, #991B1B
+
+The error text must be exactly:
+"Course is in use and cannot be deleted."
+No additional text. No extra sentences.

@@ -1,0 +1,125 @@
+You are editing an existing Figma prototype file for the
+SE Academic Management System — MJIIT.
+
+STRICT RULE: Only do exactly what is described in this prompt.
+Do NOT modify any other page, nav item, frame, or element.
+Only redesign the Course Catalog page as described below.
+
+=== REPLACE THE ENTIRE COURSE CATALOG PAGE CONTENT ===
+
+Keep the page title, subtitle, header bar, and sidebar
+exactly as they are. Replace only the main content area.
+
+Page title: "Course Catalog" — unchanged
+Page subtitle: "All course sections and their assignment
+status at a glance" — replace existing subtitle with this
+
+=== TOP ROW ===
+
+Space-between layout:
+
+Left side: filter tab buttons in a row (pill style,
+same as year filter buttons on Lab Resource Planner page):
+  [All] — active by default (maroon filled, white text)
+  [Unassigned]
+  [Assigned]
+
+Right side: "+ Add New Course" button
+  Style: maroon filled (#7B1A2A), white text, 14px, 500 weight,
+  border-radius 6px, padding 10px 16px
+
+=== MAIN TABLE ===
+
+White card, 1px border #E5E7EB, border-radius 8px,
+full content width.
+
+Table header row (6 columns):
+  COURSE SECTION | CREDITS | YEAR | ENROLLMENT | STATUS | ACTION
+
+  Background: #F9FAFB, height 44px, border-bottom #E5E7EB
+  Text: 12px, 500 weight, #6B7280, uppercase
+
+Column widths:
+  COURSE SECTION: fills remaining space
+  CREDITS: 80px, center-aligned
+  YEAR: 70px, center-aligned
+  ENROLLMENT: 100px, center-aligned
+  STATUS: 110px, center-aligned
+  ACTION: 90px, center-aligned
+
+=== DIVIDER LABELS ===
+
+Before the unassigned rows, insert a divider label row:
+  Text: "Unassigned — 3 sections"
+  Background: #F9FAFB, padding 6px 16px
+  Font: 12px, 500 weight, #6B7280
+  Border-bottom: 0.5px solid #F3F4F6
+
+Before the assigned rows, insert a second divider label:
+  Text: "Assigned — 6 sections"
+  Same style as above
+
+=== TABLE ROWS ===
+
+Each row: 60px height, border-bottom 0.5px solid #F3F4F6
+
+COURSE SECTION cell layout:
+  Line 1: Course code (maroon #7B1A2A, 14px, 500 weight) +
+  section pill tag (e.g. "Sec 01" — #F1F5F9 bg, #475569 text,
+  11px, border-radius 4px, padding 1px 6px)
+  Line 2: Course name (#6B7280, 13px, 400 weight)
+
+CREDITS cell:
+  Number in #111827, 14px, 500 weight + "CR" in #6B7280 11px
+
+YEAR cell:
+  Pill tag — Y1: purple (#EDE9FE bg, #5B21B6 text),
+  Y2: purple, Y3: green (#EAF3DE bg, #3B6D11 text),
+  Y4: green. Font 11px, 500 weight, padding 2px 7px,
+  border-radius 20px
+
+ENROLLMENT cell:
+  People icon (ti-users, 13px, #6B7280) + number,
+  13px, #6B7280
+
+STATUS cell badges (pill, border-radius 20px, 11px, 500 weight):
+  Unassigned: #FEE2E2 bg, #991B1B text
+  Assigned: #DCFCE7 bg, #166534 text
+
+ACTION cell:
+  For UNASSIGNED rows:
+    "Assign →" button
+    Background: #7B1A2A, white text, 11px, 500 weight,
+    border-radius 4px, padding 4px 10px
+  For ASSIGNED rows:
+    "View" button
+    Background: white, border: 0.5px solid #7B1A2A,
+    color: #7B1A2A, 11px, 500 weight,
+    border-radius 4px, padding 4px 10px
+
+=== SAMPLE DATA (9 rows total) ===
+
+UNASSIGNED rows (3):
+  CS101 / Sec 02 / Introduction to Programming /
+    3 CR / Y1 / 👥 42 / Unassigned / [Assign →]
+  CS301 / Sec 01 / Operating Systems /
+    3 CR / Y3 / 👥 48 / Unassigned / [Assign →]
+  MA202 / Sec 01 / Linear Algebra /
+    3 CR / Y2 / 👥 42 / Unassigned / [Assign →]
+
+ASSIGNED rows (6):
+  CS101 / Sec 01 / Introduction to Programming /
+    3 CR / Y1 / 👥 45 / Assigned / [View]
+  CS202 / Sec 01 / Data Structures /
+    3 CR / Y2 / 👥 38 / Assigned / [View]
+  CS205 / Sec 01 / Algorithms /
+    3 CR / Y2 / 👥 32 / Assigned / [View]
+  CS303 / Sec 01 / Database Systems /
+    3 CR / Y3 / 👥 35 / Assigned / [View]
+  CS404 / Sec 01 / Software Engineering /
+    3 CR / Y4 / 👥 28 / Assigned / [View]
+  MA101 / Sec 02 / Calculus I /
+    4 CR / Y1 / 👥 50 / Assigned / [View]
+
+Do not change the page title, subtitle position, header bar,
+sidebar, or nav items. Only replace the main content area.

@@ -1,0 +1,224 @@
+You are editing an existing Figma prototype file for the
+SE Academic Management System — MJIIT.
+
+STRICT RULE: Only do exactly what is described in this prompt.
+Do NOT modify, move, restyle, or touch any other page, any other
+nav item, any other frame, or any other element in this file.
+Specifically:
+- Do NOT touch the Dashboard page
+- Do NOT touch the Assignment Tool page
+- Do NOT touch any sidebar nav items or their order
+- Do NOT touch the header bar
+- Do NOT change any typography, colors, or spacing on the
+  Lab Resource Planner page that is not explicitly mentioned below
+- Only add what is described. Nothing else.
+
+=== TASK 1: ADD A THIRD TAB TO LAB RESOURCE PLANNER ===
+
+The Lab Resource Planner page currently has 2 tabs:
+  "Lab Assignment" (active) | "Validation Summary"
+
+Add ONE new tab called "Lab Configuration" as the third tab:
+  "Lab Assignment" | "Validation Summary" | "Lab Configuration"
+
+The new tab must use the exact same inactive tab style as
+"Validation Summary" — same font, same size, same color,
+same underline behavior. Do not change the style of
+"Lab Assignment" or "Validation Summary" tabs.
+
+=== LAB CONFIGURATION TAB — FRAME 1: DEFAULT STATE ===
+
+Show this as a separate frame with Lab Configuration as the
+active tab and the other two tabs shown as inactive.
+
+Subtitle below the tab bar:
+"Configure physical laboratories and their maximum seat capacities
+for use in capacity validation."
+Style: italic, 13px, #6B7280
+
+Top action row:
+  Right side only: "+ Add New Lab" button
+  Style: maroon filled (#7B1A2A), white text, 14px, 500 weight,
+  border-radius 6px, padding 10px 16px
+  Match the exact style of existing primary buttons in this file
+
+Table card:
+  Background: white
+  Border: 1px solid #E5E7EB
+  Border-radius: 8px
+  Full content width
+
+Table header (3 columns ONLY — no others):
+  LABORATORY NAME | MAX CAPACITY | ACTIONS
+
+  Header row: #F9FAFB bg, 44px height, 12px, 500 weight,
+  #6B7280, uppercase
+
+  Column widths:
+    LABORATORY NAME: fills available space
+    MAX CAPACITY: 160px, center-aligned
+    ACTIONS: 100px, center-aligned
+
+Table data rows (5 rows, 56px height, border-bottom #F3F4F6):
+  Lab A-101  |  40  |  [edit] [delete]
+  Lab B-202  |  35  |  [edit] [delete]
+  Lab C-303  |  50  |  [edit] [delete]
+  Lab D-404  |  30  |  [edit] [delete]
+  Lab E-505  |  25  |  [edit] [delete]
+
+LABORATORY NAME cell:
+  Text: #111827, 14px, 500 weight
+
+MAX CAPACITY cell:
+  Number only: #111827, 14px, 500 weight
+  Center-aligned
+
+ACTIONS cell:
+  Two icons: ti-edit (#6B7280, 18px) and ti-trash (#6B7280, 18px),
+  16px apart
+
+=== LAB CONFIGURATION TAB — FRAME 2: ADD NEW LAB MODAL ===
+
+Overlay frame on top of the Lab Configuration page.
+Background scrim: rgba(0,0,0,0.4)
+
+Modal card:
+  Width: 440px, background white, border-radius 12px, padding 24px
+  Centered on screen
+
+Modal header:
+  Left: "Add New Lab" — 18px, 500 weight, #111827
+  Right: X close — ti-x, 20px, #6B7280
+
+2 fields ONLY — exactly these two, no others:
+
+FIELD 1 — Laboratory Name:
+  Label: "Laboratory Name *" — 13px, 500 weight, #374151,
+  margin-bottom 6px
+  Input: full-width, placeholder "e.g. Lab A-101"
+  Height 40px, border 1px solid #E5E7EB, border-radius 6px,
+  padding 0 12px, 14px #111827
+  Helper text below (8px gap):
+  "Must be unique. Duplicate names will be blocked."
+  13px, #6B7280
+
+FIELD 2 — Maximum Seat Capacity:
+  Label: "Maximum Seat Capacity *" — same label style
+  Input: 120px wide, placeholder "e.g. 40", number type
+  Same height, border, radius, padding as Field 1
+  Helper text below:
+  "Used for enrollment vs capacity validation."
+  13px, #6B7280
+
+Modal footer (margin-top 24px, right-aligned, 12px gap):
+  Button 1: "Cancel"
+    Background white, border 1px solid #E5E7EB,
+    text #374151, 14px, 500 weight, border-radius 6px,
+    padding 10px 16px
+  Button 2: "Save Lab"
+    Background #7B1A2A, text white, 14px, 500 weight,
+    border-radius 6px, padding 10px 20px
+
+=== LAB CONFIGURATION TAB — FRAME 3: ADD MODAL DUPLICATE ERROR ===
+
+Everything identical to Frame 2 EXCEPT:
+- Modal title remains: "Add New Lab"
+- Laboratory Name input has border: 1px solid #DC2626
+- Below the Laboratory Name input, before helper text:
+    Background: #FEE2E2
+    Border-left: 3px solid #DC2626
+    Border-radius: 4px
+    Padding: 8px 12px
+    Margin-bottom: 4px
+    Text: "Duplicate lab name — this laboratory already exists."
+    13px, 500 weight, #991B1B
+- All other fields and buttons unchanged
+
+=== LAB CONFIGURATION TAB — FRAME 4: EDIT LAB MODAL ===
+
+Overlay frame on top of the Lab Configuration page.
+Background scrim: rgba(0,0,0,0.4)
+
+Modal card: identical dimensions and style as Frame 2.
+
+Modal header:
+  Left: "Edit Lab" — 18px, 500 weight, #111827
+  Right: X close — ti-x, 20px, #6B7280
+
+Same 2 fields as Frame 2, but pre-filled with existing values:
+
+FIELD 1 — Laboratory Name:
+  Label: "Laboratory Name *" — same label style
+  Input: pre-filled with "Lab A-101" shown in #111827, 14px
+  Same helper text as Frame 2
+
+FIELD 2 — Maximum Seat Capacity:
+  Label: "Maximum Seat Capacity *" — same label style
+  Input: pre-filled with "40" shown in #111827, 14px
+  Same helper text as Frame 2
+
+Modal footer (right-aligned, 12px gap):
+  Button 1: "Cancel" — same style as Frame 2
+  Button 2: "Save Changes"
+    Background #7B1A2A, text white, 14px, 500 weight,
+    border-radius 6px, padding 10px 20px
+
+=== TASK 2: MODIFY THE LAB ASSIGNMENT TAB ===
+
+On the existing Lab Assignment tab frame only, make these
+changes and no others:
+
+ADD two new column headers to the existing table, inserted
+between the "ASSIGNED LAB" column and the "STATUS" column:
+  New column 1 header: "LAB USED FOR"
+  New column 2 header: "LAB USED DURING"
+
+Both new headers: same style as all existing table headers
+(#F9FAFB bg, 12px, 500 weight, #6B7280, uppercase)
+
+New column widths:
+  LAB USED FOR: 160px
+  LAB USED DURING: 170px
+
+Final column order:
+  COURSE SECTION | SCHEDULE | ENROLLMENT | ASSIGNED LAB |
+  LAB USED FOR | LAB USED DURING | STATUS
+
+Now show exactly THREE row states in the table:
+
+ROW STATE 1 — Valid lab selected (no capacity violation):
+  Example: CS101 Sec01 Y1, 45 students, Lab C-303 selected
+  ASSIGNED LAB cell: "Lab C-303" dropdown with green border
+    (#16A34A) — same green style as existing valid rows
+  LAB USED FOR cell: text input, value pre-filled "Programming Lab"
+    Border: 1px solid #E5E7EB, border-radius 6px, height 36px,
+    padding 0 10px, 13px #111827, background white
+  LAB USED DURING cell: dropdown showing selected value
+    "Whole Semester"
+    Same dropdown height and border style as Lab Used For input,
+    13px #111827
+  STATUS cell: green check icon — same as existing valid state
+
+ROW STATE 2 — No lab selected:
+  Example: CS101 Sec02 Y1, 42 students, no lab chosen
+  ASSIGNED LAB cell: "Select a lab..." placeholder dropdown —
+    unchanged from existing design, do not modify
+  LAB USED FOR cell: input field shown as visually disabled
+    Background: #F9FAFB, border: 1px solid #E5E7EB,
+    border-radius 6px, height 36px, no text, no placeholder
+  LAB USED DURING cell: same disabled style as Lab Used For
+  STATUS cell: empty circle — same as existing unassigned state
+
+ROW STATE 3 — Violating lab selected (over capacity):
+  Example: CS202 Sec01 Y2, 38 students, Lab A-101 selected
+    which exceeds capacity
+  ASSIGNED LAB cell: "Lab A-101" dropdown with red border —
+    same red violation style as existing design, ⚠️+3 badge
+  LAB USED FOR cell: same disabled style as Row State 2
+  LAB USED DURING cell: same disabled style as Row State 2
+  STATUS cell: ⚠️+3 — same as existing violation state
+
+Do not change any other rows beyond these three.
+Do not change the Validation Summary tab.
+Do not change the top bar, reset button, save button,
+year filter tabs, or search bar on the Lab Assignment tab.

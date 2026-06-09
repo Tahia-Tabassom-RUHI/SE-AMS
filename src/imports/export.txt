@@ -1,0 +1,73 @@
+Go to the Export Reports page → Header Preview section.
+Update each tab to show the following columns and 2 sample 
+rows exactly. Do not change anything outside the Header 
+Preview table. Do not change any other screen.
+
+TEACHING LOAD tab:
+Columns: Category | Year | Course Code | Course Name | 
+Section | Pre-requisite | Lecturer's Name | Credit | 
+Final Exam | Lecture (hrs) | Combined Lecture? | 
+Tutorial (hrs) | Lab (hrs) | No. of Students | 
+Course Coordinator | Coordinator's Dept | Lab Name | 
+Lab Capacity | Lab Used For | Lab Used During | 
+Y1 Normal | Y1 Direct | Y2 Normal | Y2 Direct | 
+Y3 Normal | Y3 Direct | Y4 Normal | Y4 Direct | 
+Moderator 1 | Moderator 2 | Notes
+
+Sample row 1:
+SE Subject | Tahun 1 Sept 2024 | SCSE1203 | 
+Software Engineering Principles | 15 | SCSE1013 | 
+Dr. Siti Nur Khadijah | 3 | NO | 2 | NO | 1 | 0 | 25 | 
+Dr. Zatul Alwani | Software Engineering | — | — | — | — | 
+— | — | — | — | — | — | — | — | — | — | —
+
+Sample row 2:
+SE Subject | Tahun 2 Sept 2024 | SECJ2154 | 
+Object Oriented Programming | 15 | SECJ1023 | 
+Dr. Siti Nur Khadijah | 3 | NO | 2 | NO | 0 | 2 | 41 | 
+Dr. Zatul Alwani | Software Engineering | — | — | — | — | 
+— | — | — | — | — | — | — | — | — | — | Lecture at Lab
+
+---
+
+WORKLOAD SUMMARY tab:
+Columns: No. | Name of Lecturer | No. of Classes | 
+No. of Sections | No. of Subjects
+
+Sample row 1: 1 | Dr. Zatul Alwani | 3 | 3 | 2
+Sample row 2: 2 | Dr. Aisyah Rahman | 2 | 2 | 1
+
+---
+
+STUDENT SEGMENTATION tab:
+Columns: Session | Local (Tempatan) | 
+International (Antarabangsa) | Total
+
+Sample row 1: 2024/2025 Sem 1 | 10 | 11 | 21
+Sample row 2: 2023/2024 Sem 2 | 7 | 21 | 28
+
+---
+
+LAB SCHEDULE tab:
+Columns: Course Code | Course Name | Section | 
+Enrollment | Lab Name | Lab Capacity | Lab Used For | 
+Lab Used During | Status
+
+Sample row 1: CS101 | Intro to Programming | Sec 01 | 
+45 | Lab C-303 | 50 | Programming Lab | Whole Semester | Valid
+
+Sample row 2: CS202 | Data Structures | Sec 01 | 
+38 | Lab A-101 | 35 | Computer Lab | Whole Semester | 
+Over Capacity
+
+---
+
+ACTIVITY LOG tab:
+Columns: Staff Name | Activity Title | Type | 
+Hours Spent | Mode | Date Submitted | Source
+
+Sample row 1: Dr. Aisyah Rahman | Deep Learning Research | 
+Research | 120 | Hybrid | Mar 15 2026 | ORCID
+
+Sample row 2: Prof. Muhammad Ali | NSF Grant Application | 
+Grant | 80 | Hybrid | Apr 10 2026 | Manual

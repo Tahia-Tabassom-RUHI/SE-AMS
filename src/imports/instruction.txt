@@ -1,0 +1,63 @@
+Here's the updated prompt with that instruction added prominently:
+
+---
+
+> **IMPORTANT: Do NOT change anything else in this prototype. Do not modify the sidebar navigation, the top header bar, any other pages, any other screens, color scheme, typography, spacing, or any component outside the Export Reports page main content area. Only redesign the main content area of the Export Reports page as described below. Everything else must remain exactly as it is.**
+>
+> ---
+>
+> Redesign only the **main content area** of the **Export Reports** page of the SE Academic Management System. Keep the existing dark red (`#7B1C2E`) and white color scheme, sidebar navigation, and UTM header bar completely untouched.
+>
+> ---
+>
+> **SECTION 1 — Export Configuration Card** (white card, rounded corners, subtle shadow)
+>
+> **Template Selection** — dropdown showing "MJIIT ESE Legacy Format (2025/2026)" with a green file icon. Below it: small grey text "Automatically maps database fields to exact MJIIT column headers"
+>
+> **Semester & Session row** — two dropdowns side by side:
+> - Label "Semester" → dropdown showing "Semester 1"
+> - Label "Session" → dropdown showing "2024/2025"
+>
+> **Data Scope** — label "Data Scope" with helper text "(Select tabs to include in Excel file)" in muted colour. Below it a bordered checkbox list with 5 items, all checked with dark red checkboxes:
+> 1. Course Offerings & Teaching Load
+> 2. Staff Workload Summary
+> 3. Student Segmentation (Year/Origin/Intake)
+> 4. Lab Resource Schedule
+> 5. Staff Activity Log (Hybrid)
+>
+> Small grey text below: "Selected sheets will appear as tabs at the bottom of the Excel workbook"
+>
+> **File Format** — radio buttons:
+> - ● .xlsx (Recommended) — Multi-tab Excel workbook (selected, dark red)
+> - ○ .csv — Comma-separated values
+>
+> **NFR-03 Compliance badge** — small green badge with document icon, text: "All 30 legacy MJIIT SE column headers are auto-mapped. No manual formatting required after export."
+>
+> **Generate Full Report button** — full-width, dark red (`#7B1C2E`), white bold text, document icon on left
+>
+> ---
+>
+> **SECTION 2 — Header Preview Card** (white card below the config card)
+>
+> Title: **"Header Preview"** bold, subtitle: "Sample of how exported columns will be formatted per selected sheet"
+>
+> **Sheet tab switcher row** — 5 pill tabs in a horizontal row, styled like Excel sheet tabs at the bottom of a spreadsheet. Active tab is white with dark red bottom border, inactive tabs are light grey:
+> - Teaching Load (active)
+> - Workload Summary
+> - Student Segmentation
+> - Lab Schedule
+> - Activity Log
+>
+> **Preview table** — dark green (`#1D4E3F`) header row, white rows alternating with very light grey. Show a horizontal scrollbar indicator at the bottom edge. Header columns in dark green background with white bold small text:
+>
+> `Category` | `Year` | `Course Code` | `Course Name` | `Section` | `Pre-requisite` | `Lecturer's Name` | `Credit` | `Final Exam` | `Lecture (hrs)` | `Combined Lecture?` | `Tutorial (hrs)` | `Lab (hrs)` | `No. of Students` | `Course Coordinator` | `Coordinator's Dept` | `Lab Needed` | `Lab Name` | `Lab Capacity` | `Lab Used For` | `Lab Used During` | `Y1 NRM` | `Y1 DIR` | `Y2 NRM` | `Y2 DIR` | `Y3 NRM` | `Y3 DIR` | `Y4 NRM` | `Y4 DIR` | `Moderator 1` | `Moderator 2`
+>
+> Show 2 sample data rows:
+> - Row 1: `SE Subject` | `Tahun 1 Sept 2024` | `SCSE1203` | `Software Engineering Principles` | `15` | `SCSE1013` | `Dr. Siti Nur Khadijah` | `3` | `NO` | `2` | `NO` | `1` | `0` | `25` | `Dr. Sim Hiew Moi` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — | —
+> - Row 2: `SE Subject` | `Tahun 2 Sept 2024` | `SECJ2154` | `Object Oriented Programming` | `15` | `SECJ1023` | `Dr. Siti Nur Khadijah` | `3` | `NO` | `2` | `NO` | `0` | `2` | `41` | — | — | — | — | — | — | — | — | — | — | — | — | — | — | — | —
+>
+> **Excel tab strip** — at the very bottom of the preview card, a light grey bar mimicking Excel's sheet tab row. Show 5 tab labels: `Teaching Load` (white, active) | `Workload Summary` | `Student Segmentation` | `Lab Schedule` | `Activity Log` — all others in light grey. Add a small Excel-style tab icon to the left.
+>
+> ---
+>
+> **REMINDER: Do not touch the sidebar, header bar, other pages, or any other part of the prototype. Only the Export Reports main content area described above should change.**
