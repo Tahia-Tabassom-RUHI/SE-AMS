@@ -7,6 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../components/ui/select';
+import { useAppData } from '../contexts/AppDataContext';
 
 type AuditTab = 'assignment' | 'activities' | 'trail';
 
@@ -202,14 +203,37 @@ function StaffActivities() {
 // ── Tab 3: Audit Trail ──────────────────────────────────────────────────────
 
 function AuditTrail() {
+  const { auditLogs } = useAppData();
   const [actionFilter, setActionFilter] = useState('all');
   const [userFilter, setUserFilter] = useState('all');
   const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
 
-  const uniqueUsers = Array.from(new Set(trailRows.map(r => r.user)));
+  const liveTrailRows = auditLogs.map(log => ({
+    id: log.id,
+    timestamp: log.timestamp.toLocaleString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    }),
+    user: log.user,
+    type: log.action.includes('Export')
+      ? 'Export'
+      : log.action.includes('Status')
+      ? 'Status Change'
+      : log.action.includes('Assignment')
+      ? 'Assignment'
+      : 'Activity Entry',
+    details: log.details,
+    ip: '127.0.0.1',
+  }));
 
-  const filtered = trailRows.filter(r => {
+  const rows = [...liveTrailRows, ...trailRows];
+  const uniqueUsers = Array.from(new Set(rows.map(r => r.user)));
+
+  const filtered = rows.filter(r => {
     if (actionFilter !== 'all' && r.type !== actionFilter) return false;
     if (userFilter !== 'all' && r.user !== userFilter) return false;
     return true;
@@ -283,7 +307,7 @@ function AuditTrail() {
 
       {/* Stats */}
       <div className="flex gap-4">
-        <StatCard label="Total Actions" value={47} />
+        <StatCard label="Total Actions" value={rows.length} />
         <StatCard label="Today" value={6} color="#185FA5" />
         <StatCard label="This Week" value={18} />
         <StatCard label="Unique Users" value={8} />

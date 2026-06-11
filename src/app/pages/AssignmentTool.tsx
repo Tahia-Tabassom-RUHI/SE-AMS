@@ -12,38 +12,30 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '../components/ui/toolti
 import { Info, Search, Users, User, ChevronDown, CalendarDays, ArrowRightLeft } from 'lucide-react';
 import { Badge } from '../components/ui/badge';
 import type { Course, Staff } from '../types';
+import { mockCourses, mockStaff } from '../data/mockData';
+import { useAppData } from '../contexts/AppDataContext';
+import { useAuth } from '../contexts/AuthContext';
 
-// Mock Data
-const mockCourses: Course[] = [
-  { id: 'CS101-01', code: 'CS101', name: 'Introduction to Programming', section: '01', credits: 3.0, year: 1, studentCount: 45, labHours: 2, tutorialHours: 1 },
-  { id: 'CS101-02', code: 'CS101', name: 'Introduction to Programming', section: '02', credits: 3.0, year: 1, studentCount: 42, labHours: 2, tutorialHours: 1 },
-  { id: 'CS202-01', code: 'CS202', name: 'Data Structures', section: '01', credits: 3.0, year: 2, studentCount: 38, labHours: 2, tutorialHours: 0 },
-  { id: 'CS303-01', code: 'CS303', name: 'Database Systems', section: '01', credits: 3.0, year: 3, studentCount: 35, labHours: 1, tutorialHours: 1 },
-  { id: 'CS404-01', code: 'CS404', name: 'Software Engineering', section: '01', credits: 3.0, year: 4, studentCount: 28, labHours: 0, tutorialHours: 2 },
-  { id: 'MA101-01', code: 'MA101', name: 'Calculus I', section: '01', credits: 4.0, year: 1, studentCount: 50, labHours: 0, tutorialHours: 2 },
-  { id: 'CS205-01', code: 'CS205', name: 'Algorithms', section: '01', credits: 3.0, year: 2, studentCount: 32, labHours: 1, tutorialHours: 1 },
-  { id: 'CS301-01', code: 'CS301', name: 'Operating Systems', section: '01', credits: 3.0, year: 3, studentCount: 48, labHours: 1, tutorialHours: 1 },
-  { id: 'MA202-01', code: 'MA202', name: 'Linear Algebra', section: '01', credits: 4.0, year: 2, studentCount: 42, labHours: 0, tutorialHours: 2 },
-];
+type UnassignedCourse = {
+  id: string;
+  code: string;
+  name: string;
+  section: string;
+  year: number;
+  schedule: string;
+  studentCount: number;
+  deadline: string;
+  urgency: 'urgent' | 'soon' | 'pending';
+  credits: number;
+};
 
 // Unassigned courses data
-const unassignedCourses = [
+const unassignedCourses: UnassignedCourse[] = [
   { id: 'CS301-01', code: 'CS301', name: 'Operating Systems', section: '01', year: 3, schedule: 'Mon 10am–12pm', studentCount: 48, deadline: 'Due May 5', urgency: 'urgent', credits: 3.0 },
   { id: 'CS401-01', code: 'CS401', name: 'Computer Networks', section: '01', year: 4, schedule: 'Tue 2pm–4pm', studentCount: 28, deadline: 'Due May 5', urgency: 'urgent', credits: 3.0 },
   { id: 'MA202-01', code: 'MA202', name: 'Linear Algebra', section: '01', year: 2, schedule: 'Wed 8am–10am', studentCount: 42, deadline: 'Due May 6', urgency: 'soon', credits: 4.0 },
   { id: 'CS105-02', code: 'CS105', name: 'Web Development', section: '02', year: 1, schedule: 'Thu 2pm–4pm', studentCount: 36, deadline: 'Due May 10', urgency: 'pending', credits: 3.0 },
   { id: 'CS206-01', code: 'CS206', name: 'Software Design', section: '01', year: 2, schedule: 'Fri 10am–12pm', studentCount: 30, deadline: 'Due May 10', urgency: 'pending', credits: 3.0 },
-];
-
-const mockStaff: Staff[] = [
-  { id: 'staff-1', name: 'Dr. Aisyah Rahman', currentLoad: 9.0, status: 'available' },
-  { id: 'staff-2', name: 'Prof. Muhammad Ali', currentLoad: 12.0, status: 'available' },
-  { id: 'staff-3', name: 'Dr. Siti Aminah', currentLoad: 13.0, status: 'warning' },
-  { id: 'staff-4', name: 'Dr. Ahmad Hassan', currentLoad: 15.0, status: 'full', exemptionFlag: true, exemptionType: 'Maternity Leave', exemptionStartDate: new Date('2026-01-01'), exemptionExpiryDate: new Date('2026-12-31') },
-  { id: 'staff-5', name: 'Dr. Fatimah Zahra', currentLoad: 6.0, status: 'available' },
-  { id: 'staff-6', name: 'Prof. Ibrahim Malik', currentLoad: 0, status: 'available' },
-  { id: 'staff-7', name: 'Dr. Noor Hayati', currentLoad: 14.0, status: 'warning' },
-  { id: 'staff-coordinator', name: 'Dr. Zatul Alwani (Me)', currentLoad: 6.0, status: 'available' },
 ];
 
 // Exemption tab: all staff in specified order
@@ -68,11 +60,12 @@ const YEAR_BADGE: Record<number, { bg: string; text: string }> = {
 export function AssignmentTool() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const { staff, updateStaffStatus, sendAssignment, isStaffExemptionActive } = useAppData();
 
   const prefillCourseId = (location.state as { prefillCourseId?: string } | null)?.prefillCourseId ?? null;
   const prefillCourse = prefillCourseId ? mockCourses.find(c => c.id === prefillCourseId) ?? null : null;
 
-  const [staff, setStaff] = useState<Staff[]>(mockStaff);
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(prefillCourse);
   const [prefillActive, setPrefillActive] = useState(!!prefillCourse);
   const [selectedLecturer, setSelectedLecturer] = useState<Staff | null>(null);
@@ -142,18 +135,8 @@ export function AssignmentTool() {
     const targetLecturer = selectedLecturer;
     if (!targetLecturer) return;
 
-    const updatedStaff = staff.map((s) =>
-      s.id === targetLecturer.id
-        ? { ...s, ...exemptionData }
-        : s
-    );
-
-    setStaff(updatedStaff);
-
-    if (selectedLecturer) {
-      const updated = updatedStaff.find(s => s.id === selectedLecturer.id);
-      if (updated) setSelectedLecturer(updated);
-    }
+    const updated = updateStaffStatus(targetLecturer.id, exemptionData, user ? `${user.firstName} ${user.lastName}` : 'Coordinator');
+    if (updated) setSelectedLecturer(updated);
 
     const message = exemptionData.exemptionFlag
       ? `Exemption status activated for ${targetLecturer.name}`
@@ -168,6 +151,13 @@ export function AssignmentTool() {
       setTimeout(() => setShowError(false), 3000);
       return;
     }
+
+    sendAssignment(
+      selectedCourse,
+      selectedLecturer,
+      [primaryModerator, secondaryModerator].filter(Boolean) as Staff[],
+      user ? `${user.firstName} ${user.lastName}` : 'Coordinator'
+    );
 
     toast.success(`Assignment sent to ${selectedLecturer?.name}`, { duration: 3000 });
 
@@ -501,7 +491,30 @@ export function AssignmentTool() {
                 </div>
 
                 <Button
-                  onClick={() => toast.success(`Leave saved for ${selectedStatusStaff.name}`, { duration: 3000 })}
+                  onClick={() => {
+                    if (!leaveType.trim() || !leaveStartDate || !leaveEndDate) {
+                      toast.error('All leave fields are required', { duration: 3000 });
+                      return;
+                    }
+
+                    const updated = updateStaffStatus(
+                      selectedStatusStaff.id,
+                      {
+                        exemptionFlag: true,
+                        exemptionType: 'Maternity Leave',
+                        exemptionStartDate: new Date(leaveStartDate),
+                        exemptionExpiryDate: new Date(leaveEndDate),
+                        exemptionReason: leaveType,
+                      },
+                      user ? `${user.firstName} ${user.lastName}` : 'Coordinator'
+                    );
+                    if (updated) setSelectedStatusStaff(updated);
+
+                    toast.success(`Leave saved for ${selectedStatusStaff.name}`, { duration: 3000 });
+                    setLeaveType('');
+                    setLeaveStartDate('');
+                    setLeaveEndDate('');
+                  }}
                   className="w-full bg-[#900021] hover:bg-[#5C001F] text-white"
                 >
                   Save Leave
@@ -553,7 +566,29 @@ export function AssignmentTool() {
 
                 <Button
                   disabled={!adjunctActive}
-                  onClick={() => adjunctActive && toast.success(`Adjunct status saved for ${selectedStatusStaff.name}`, { duration: 3000 })}
+                  onClick={() => {
+                    if (!adjunctActive || !adjunctReason.trim()) {
+                      toast.error('Please provide a reason for adjunct status', { duration: 3000 });
+                      return;
+                    }
+
+                    const updated = updateStaffStatus(
+                      selectedStatusStaff.id,
+                      {
+                        exemptionFlag: true,
+                        exemptionType: 'Adjunct Status',
+                        exemptionReason: adjunctReason,
+                        exemptionStartDate: undefined,
+                        exemptionExpiryDate: undefined,
+                      },
+                      user ? `${user.firstName} ${user.lastName}` : 'Coordinator'
+                    );
+                    if (updated) setSelectedStatusStaff(updated);
+
+                    toast.success(`Adjunct status saved for ${selectedStatusStaff.name}`, { duration: 3000 });
+                    setAdjunctActive(false);
+                    setAdjunctReason('');
+                  }}
                   className={!adjunctActive
                     ? 'w-full bg-[#D1D5DB] text-gray-400 cursor-not-allowed hover:bg-[#D1D5DB]'
                     : 'w-full bg-[#900021] hover:bg-[#5C001F] text-white'
@@ -622,7 +657,30 @@ export function AssignmentTool() {
 
                 <Button
                   disabled={!secondedActive}
-                  onClick={() => secondedActive && toast.success(`Seconded status saved for ${selectedStatusStaff.name}`, { duration: 3000 })}
+                  onClick={() => {
+                    if (!secondedActive || !homeDepartment.trim() || !secondedReason.trim()) {
+                      toast.error('Please fill in all required fields', { duration: 3000 });
+                      return;
+                    }
+
+                    const updated = updateStaffStatus(
+                      selectedStatusStaff.id,
+                      {
+                        exemptionFlag: true,
+                        exemptionType: 'Borrowed Staff',
+                        exemptionReason: `${homeDepartment} — ${secondedReason}`,
+                        exemptionStartDate: undefined,
+                        exemptionExpiryDate: undefined,
+                      },
+                      user ? `${user.firstName} ${user.lastName}` : 'Coordinator'
+                    );
+                    if (updated) setSelectedStatusStaff(updated);
+
+                    toast.success(`Seconded status saved for ${selectedStatusStaff.name}`, { duration: 3000 });
+                    setSecondedActive(false);
+                    setHomeDepartment('');
+                    setSecondedReason('');
+                  }}
                   className={!secondedActive
                     ? 'w-full bg-[#D1D5DB] text-gray-400 cursor-not-allowed hover:bg-[#D1D5DB]'
                     : 'w-full bg-[#900021] hover:bg-[#5C001F] text-white'
@@ -660,7 +718,13 @@ export function AssignmentTool() {
                     activeExemptions.map(person => (
                       <tr key={person.id} className="hover:bg-[#F3F4F6] transition-colors">
                         <td className="px-6 py-4 font-medium text-gray-900">{person.name}</td>
-                        <td className="px-6 py-4 text-sm text-gray-700">On Leave</td>
+                        <td className="px-6 py-4 text-sm text-gray-700">
+                          {person.exemptionType === 'Adjunct Status'
+                            ? 'Adjunct Lecturer'
+                            : person.exemptionType === 'Borrowed Staff'
+                            ? 'Seconded Staff'
+                            : 'On Leave'}
+                        </td>
                         <td className="px-6 py-4 text-sm text-gray-700">{person.exemptionType}</td>
                         <td className="px-6 py-4 text-sm text-gray-700">
                           {person.exemptionStartDate && person.exemptionExpiryDate
@@ -668,7 +732,11 @@ export function AssignmentTool() {
                             : '—'}
                         </td>
                         <td className="px-6 py-4">
-                          <Badge className="bg-[#D1FAE5] text-[#065F46] border-green-200 text-xs">Active</Badge>
+                          {isStaffExemptionActive(person.id) ? (
+                            <Badge className="bg-[#D1FAE5] text-[#065F46] border-green-200 text-xs">Active</Badge>
+                          ) : (
+                            <Badge className="bg-gray-100 text-gray-600 border-gray-200 text-xs">Expired</Badge>
+                          )}
                         </td>
                       </tr>
                     ))

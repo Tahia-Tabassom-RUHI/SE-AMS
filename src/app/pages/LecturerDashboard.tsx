@@ -45,7 +45,7 @@ export function LecturerDashboard() {
       type: 'grant',
       color: '#EAB308',
     },
-    ...(user?.role === 'onleave' ? [{
+    ...(user?.status === 'onleave' ? [{
       id: '6',
       title: 'My Leave Expires Dec 31',
       date: new Date(2026, 5, 30),
@@ -54,7 +54,7 @@ export function LecturerDashboard() {
     }] : []),
   ];
 
-  const calendarSpanEvents: CalendarSpanEvent[] = user?.role === 'onleave' ? [
+  const calendarSpanEvents: CalendarSpanEvent[] = user?.status === 'onleave' ? [
     {
       id: 'leave-span-1',
       title: 'My Leave Period',
@@ -70,7 +70,7 @@ export function LecturerDashboard() {
     { color: '#10B981', label: 'Service Activity' },
     { color: '#8B5CF6', label: 'Research Activity' },
     { color: '#EAB308', label: 'Grant Activity' },
-    ...(user?.role === 'onleave' ? [
+    ...(user?.status === 'onleave' ? [
       { color: '#F59E0B', label: '🟡 Leave Expiry' },
       { color: '#F59E0B', label: '🟡 My Leave Period' },
     ] : []),

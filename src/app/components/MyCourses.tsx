@@ -1,101 +1,18 @@
 import { TrendingUp, Users } from 'lucide-react';
 import { Badge } from './ui/badge';
 import { useAuth } from '../contexts/AuthContext';
-
-interface Course {
-  courseCode: string;
-  courseName: string;
-  section: string;
-  roleType: 'Teaching' | 'Moderator';
-  credits: number;
-  studentCount: number;
-  semester: string;
-}
-
-const lecturerCourses: Course[] = [
-  {
-    courseCode: 'CS101',
-    courseName: 'Introduction to Programming',
-    section: '01',
-    roleType: 'Teaching',
-    credits: 3,
-    studentCount: 45,
-    semester: 'Spring 2026',
-  },
-  {
-    courseCode: 'CS205',
-    courseName: 'Algorithms',
-    section: '01',
-    roleType: 'Teaching',
-    credits: 3,
-    studentCount: 32,
-    semester: 'Spring 2026',
-  },
-  {
-    courseCode: 'CS205',
-    courseName: 'Algorithms',
-    section: '02',
-    roleType: 'Teaching',
-    credits: 3,
-    studentCount: 32,
-    semester: 'Spring 2026',
-  },
-  {
-    courseCode: 'CS303',
-    courseName: 'Database Systems',
-    section: '01',
-    roleType: 'Moderator',
-    credits: 0.5,
-    studentCount: 35,
-    semester: 'Spring 2026',
-  },
-  {
-    courseCode: 'SCSE2243',
-    courseName: 'Software Engineering',
-    section: '01',
-    roleType: 'Teaching',
-    credits: 3,
-    studentCount: 40,
-    semester: 'Spring 2026',
-  },
-  {
-    courseCode: 'CS202',
-    courseName: 'Data Structures',
-    section: '01',
-    roleType: 'Moderator',
-    credits: 0.5,
-    studentCount: 38,
-    semester: 'Spring 2026',
-  },
-];
-
-const coordinatorCourses: Course[] = [
-  {
-    courseCode: 'SCSE2243',
-    courseName: 'Software Engineering',
-    section: '01',
-    roleType: 'Teaching',
-    credits: 3,
-    studentCount: 40,
-    semester: 'Spring 2026',
-  },
-  {
-    courseCode: 'CS303',
-    courseName: 'Database Systems',
-    section: '01',
-    roleType: 'Moderator',
-    credits: 0.5,
-    studentCount: 35,
-    semester: 'Spring 2026',
-  },
-];
+import { useAppData } from '../contexts/AppDataContext';
 
 export function MyCourses() {
   const { user } = useAuth();
+  const { myCourses, getStaffForUser, isStaffExemptionActive } = useAppData();
   const isCoordinator = user?.role === 'coordinator';
-  const isOnLeave = user?.role === 'onleave';
+  const currentStaff = getStaffForUser(user);
+  const isOnLeave = isStaffExemptionActive(currentStaff?.id) || user?.status === 'onleave';
 
-  const courses = isCoordinator ? coordinatorCourses : lecturerCourses;
+  const courses = currentStaff
+    ? myCourses.filter(course => course.ownerId === currentStaff.id)
+    : [];
   const totalCredits = courses.reduce((sum, course) => sum + course.credits, 0);
   const remainingCapacity = 15.0 - totalCredits;
 

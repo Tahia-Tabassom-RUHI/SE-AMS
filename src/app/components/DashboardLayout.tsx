@@ -4,9 +4,11 @@ import { UnifiedTopNav } from './UnifiedTopNav';
 import { UnifiedSystemSidebar } from './UnifiedSystemSidebar';
 import { TooltipProvider } from './ui/tooltip';
 import { ActivityProvider } from '../contexts/ActivityContext';
+import { AppDataProvider } from '../contexts/AppDataContext';
 
 export function DashboardLayout() {
   return (
+    <AppDataProvider>
     <ActivityProvider>
     <TooltipProvider>
       <Toaster />
@@ -25,5 +27,6 @@ export function DashboardLayout() {
       </div>
     </TooltipProvider>
     </ActivityProvider>
+    </AppDataProvider>
   );
 }

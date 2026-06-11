@@ -6,70 +6,23 @@ import { QueueTable } from './QueueTable';
 import { DeclineModal } from './DeclineModal';
 import { useAuth } from '../contexts/AuthContext';
 import type { AssignmentRequest } from '../types';
-
-const mockRequests: AssignmentRequest[] = [
-  {
-    id: 'req-1',
-    courseCode: 'CS101',
-    courseName: 'Introduction to Programming',
-    section: '01',
-    credits: 3.0,
-    roleType: 'Teaching',
-    status: 'new',
-    receivedDate: new Date(Date.now() - 1000 * 60 * 60 * 12),
-    deadlineDate: new Date(Date.now() + 1000 * 60 * 60 * 36),
-    studentCount: 45,
-    labHours: 2,
-    tutorialHours: 1,
-  },
-  {
-    id: 'req-2',
-    courseCode: 'CS202',
-    courseName: 'Data Structures',
-    section: '01',
-    credits: 3.0,
-    roleType: 'Teaching',
-    status: 'expiring',
-    receivedDate: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3),
-    deadlineDate: new Date(Date.now() + 1000 * 60 * 60 * 24),
-    studentCount: 38,
-    labHours: 2,
-    tutorialHours: 0,
-  },
-  {
-    id: 'req-3',
-    courseCode: 'CS303',
-    courseName: 'Database Systems',
-    section: '01',
-    credits: 0.5,
-    roleType: 'Moderator',
-    status: 'new',
-    receivedDate: new Date(Date.now() - 1000 * 60 * 60 * 6),
-    deadlineDate: new Date(Date.now() + 1000 * 60 * 60 * 48),
-    studentCount: 35,
-    labHours: 1,
-    tutorialHours: 1,
-  },
-  {
-    id: 'req-4',
-    courseCode: 'MA101',
-    courseName: 'Calculus I',
-    section: '02',
-    credits: 4.0,
-    roleType: 'Teaching',
-    status: 'new',
-    receivedDate: new Date(Date.now() - 1000 * 60 * 60 * 8),
-    deadlineDate: new Date(Date.now() + 1000 * 60 * 60 * 40),
-    studentCount: 50,
-    labHours: 0,
-    tutorialHours: 2,
-  },
-];
+import { useAppData } from '../contexts/AppDataContext';
 
 export function LecturerQueueContent() {
   const { user } = useAuth();
-  const [requests, setRequests] = useState<AssignmentRequest[]>(mockRequests);
-  const [currentLoad, setCurrentLoad] = useState(user?.currentLoad || 9.0);
+  const {
+    assignmentRequests,
+    acceptAssignment,
+    declineAssignment,
+    getStaffForUser,
+    isStaffExemptionActive,
+  } = useAppData();
+  const currentStaff = getStaffForUser(user);
+  const requests = user?.role === 'coordinator'
+    ? assignmentRequests
+    : assignmentRequests.filter(request => !request.lecturerId || request.lecturerId === currentStaff?.id);
+  const currentLoad = currentStaff?.currentLoad ?? user?.currentLoad ?? 9.0;
+  const isExemptionActive = isStaffExemptionActive(currentStaff?.id);
   const [declineModalOpen, setDeclineModalOpen] = useState(false);
   const [selectedRequest, setSelectedRequest] = useState<AssignmentRequest | null>(null);
   const [hoveredCredits, setHoveredCredits] = useState(0);
@@ -80,15 +33,15 @@ export function LecturerQueueContent() {
   const handleAccept = (request: AssignmentRequest) => {
     const newLoad = currentLoad + request.credits;
 
-    if (newLoad > 15) {
+    // Allow assignment if exempt, or if within 15-credit limit
+    if (!isExemptionActive && newLoad > 15) {
       toast.error('Cannot accept: Would exceed 15-credit limit', {
         duration: 3000,
       });
       return;
     }
 
-    setCurrentLoad(newLoad);
-    setRequests(prev => prev.filter(req => req.id !== request.id));
+    acceptAssignment(request, user);
 
     toast.success(
       <div>
@@ -102,6 +55,13 @@ export function LecturerQueueContent() {
   };
 
   const handleDecline = (request: AssignmentRequest) => {
+    if (user?.role === 'lecturer' && currentLoad < 12 && !isExemptionActive) {
+      toast.error(
+        'Rejection blocked: lecturers below 12 credits may only reject when an active leave or status exemption is approved.',
+        { duration: 5000 }
+      );
+      return;
+    }
     setSelectedRequest(request);
     setDeclineModalOpen(true);
   };
@@ -109,7 +69,7 @@ export function LecturerQueueContent() {
   const confirmDecline = (reason: string) => {
     if (!selectedRequest) return;
 
-    setRequests(prev => prev.filter(req => req.id !== selectedRequest.id));
+    declineAssignment(selectedRequest, reason, user);
 
     toast.error(
       <div>
@@ -139,6 +99,7 @@ export function LecturerQueueContent() {
         pendingCount={requests.length}
         currentLoad={currentLoad}
         nextDeadline={requests.length > 0 ? Math.min(...requests.map(r => r.deadlineDate.getTime())) : null}
+        isExemptionActive={isExemptionActive}
       />
 
       <LecturerWorkloadGauge
@@ -146,6 +107,7 @@ export function LecturerQueueContent() {
         pendingCredits={pendingCredits}
         projectedTotal={projectedTotal}
         hoveredCredits={hoveredCredits}
+        isExemptionActive={isExemptionActive}
       />
 
       <QueueTable
@@ -155,6 +117,7 @@ export function LecturerQueueContent() {
         onDecline={handleDecline}
         onHoverPreview={setHoveredCredits}
         onHoverEnd={() => setHoveredCredits(0)}
+        isExemptionActive={isExemptionActive}
       />
 
       <DeclineModal

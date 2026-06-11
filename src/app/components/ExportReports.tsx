@@ -13,6 +13,8 @@ import {
 } from './ui/select';
 import { Progress } from './ui/progress';
 import { toast } from 'sonner';
+import { useAuth } from '../contexts/AuthContext';
+import { useAppData } from '../contexts/AppDataContext';
 
 interface DataScope {
   id: string;
@@ -89,6 +91,8 @@ const SHEET_DATA: Record<PreviewSheet, { headers: string[]; rows: string[][] }> 
 };
 
 export function ExportReports() {
+  const { user } = useAuth();
+  const { recordAudit } = useAppData();
   const [template, setTemplate] = useState('mjiit-ese-2025-2026');
   const [semester, setSemester] = useState('semester-1');
   const [session, setSession] = useState('2024-2025');
@@ -134,6 +138,25 @@ export function ExportReports() {
       setTimeout(() => {
         setIsGenerating(false);
         setProgress(0);
+        const selectedLabels = selectedScopes.map(scope => scope.label).join('\n');
+        const mockFile = new Blob(
+          [
+            `MJIIT ESE Mock Export\nTemplate: ${template}\nSemester: ${semester}\nSession: ${session}\nFormat: ${fileFormat}\n\nIncluded Sheets:\n${selectedLabels}\n`,
+          ],
+          { type: 'text/plain;charset=utf-8' }
+        );
+        const url = URL.createObjectURL(mockFile);
+        const anchor = document.createElement('a');
+        anchor.href = url;
+        anchor.download = `MJIIT_SE_Load_${session}_${semester}.${fileFormat === 'csv' ? 'csv' : 'txt'}`;
+        anchor.click();
+        URL.revokeObjectURL(url);
+        recordAudit({
+          user: user ? `${user.firstName} ${user.lastName}` : 'Coordinator',
+          action: 'Export Generated',
+          status: 'Success',
+          details: `Generated mock MJIIT ESE ${fileFormat.toUpperCase()} export with ${selectedScopes.length} sheet(s)`,
+        });
         toast.success(
           <div className="flex items-center gap-2">
             <CheckCircle2 className="w-5 h-5 text-green-600" />

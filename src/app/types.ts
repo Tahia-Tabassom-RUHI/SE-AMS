@@ -24,6 +24,8 @@ export interface Staff {
 
 export interface AssignmentRequest {
   id: string;
+  lecturerId?: string;
+  lecturerName?: string;
   courseCode: string;
   courseName: string;
   section: string;
@@ -35,6 +37,29 @@ export interface AssignmentRequest {
   studentCount: number;
   labHours: number;
   tutorialHours: number;
+  moderatorNames?: string[];
+  sentBy?: string;
+}
+
+export interface MyCourse {
+  id: string;
+  ownerId: string;
+  courseCode: string;
+  courseName: string;
+  section: string;
+  roleType: 'Teaching' | 'Moderator';
+  credits: number;
+  studentCount: number;
+  semester: string;
+}
+
+export interface AuditLog {
+  id: string;
+  timestamp: Date;
+  user: string;
+  action: string;
+  status: 'Success' | 'Warning' | 'Blocked';
+  details: string;
 }
 
 export interface StaffActivity {

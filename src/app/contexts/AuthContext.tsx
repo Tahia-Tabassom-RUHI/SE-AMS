@@ -1,6 +1,8 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
-export type UserRole = 'coordinator' | 'lecturer' | 'onleave';
+export type UserRole = 'coordinator' | 'lecturer';
+
+export type StaffStatus = 'onleave' | 'adjunct' | 'seconded' | null;
 
 export interface User {
   id: string;
@@ -9,12 +11,16 @@ export interface User {
   email: string;
   staffId: string;
   role: UserRole;
+  status?: StaffStatus;
   orcidId?: string;
   currentLoad?: number;
+  exemptionFlag?: boolean;
+  exemptionType?: 'Maternity Leave' | 'Adjunct Status' | 'Borrowed Staff';
 }
 
 interface AuthContextType {
   user: User | null;
+  token?: string | null;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
   updateProfile: (profile: Partial<User>) => void;
@@ -45,24 +51,17 @@ const MOCK_USERS: Record<string, User> = {
     orcidId: '0000-0002-1234-5678',
     currentLoad: 13.0,
   },
-  'onleave@utm.my': {
-    id: 'user-lect-2',
-    firstName: 'Noor',
-    lastName: 'Hayati',
-    email: 'onleave@utm.my',
-    staffId: 'UTM-LEC-007',
-    role: 'onleave',
-    currentLoad: 9.0,
-  },
 };
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
+  const [token, setToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     try {
       const storedUser = localStorage.getItem('auth_user');
+      const storedToken = localStorage.getItem('auth_token');
       if (storedUser) {
         try {
           const parsed = JSON.parse(storedUser);
@@ -71,6 +70,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           localStorage.removeItem('auth_user');
           setUser(null);
         }
+      }
+
+      if (storedToken) {
+        setToken(storedToken);
       }
     } catch (error) {
       console.error('Auth initialization error:', error);
@@ -89,13 +92,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       throw new Error('Invalid credentials');
     }
 
+    // Generate a simple mock JWT-like token (not a real JWT). This keeps the
+    // front-end auth flow ready for swapping to a real backend later.
+    const mockToken = `mock-token-${Math.random().toString(36).slice(2)}`;
+
     localStorage.setItem('auth_user', JSON.stringify(mockUser));
+    localStorage.setItem('auth_token', mockToken);
     setUser(mockUser);
+    setToken(mockToken);
   };
 
   const logout = () => {
     localStorage.removeItem('auth_user');
+    localStorage.removeItem('auth_token');
     setUser(null);
+    setToken(null);
   };
 
   const updateProfile = (profile: Partial<User>) => {
@@ -114,10 +125,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     <AuthContext.Provider
       value={{
         user,
+        token,
         login,
         logout,
         updateProfile,
-        isAuthenticated: !!user,
+        isAuthenticated: !!user && !!token,
         isLoading,
         hasRole,
       }}

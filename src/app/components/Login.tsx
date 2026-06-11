@@ -9,7 +9,8 @@ import { GraduationCap, AlertCircle, ChevronDown } from 'lucide-react';
 const DEMO_USERS = [
   { email: 'coordinator@utm.my', password: 'utm123', label: 'Coordinator' },
   { email: 'lecturer@utm.my', password: 'utm123', label: 'Lecturer' },
-  { email: 'onleave@utm.my', password: 'utm123', label: 'Lecturer (On Leave)' },
+  // Note: the separate "Lecturer (On Leave)" demo login was removed per project
+  // constraints. On-leave is represented as a staff status instead of a role.
 ];
 
 export function Login() {

@@ -1,7 +1,7 @@
 import { Bell, ChevronDown, LogOut } from 'lucide-react';
 import utmLogo from '@/imports/logo-512x512-1-1.jpg';
 import { useNavigate } from 'react-router';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth, UserRole, StaffStatus } from '../contexts/AuthContext';
 import { Avatar, AvatarFallback } from './ui/avatar';
 import { Badge } from './ui/badge';
 import {
@@ -33,10 +33,9 @@ export function UnifiedTopNav({ notificationCount = 3 }: UnifiedTopNavProps) {
 
   const getRoleBadge = () => {
     if (!user) return null;
-    const configs: Record<string, { className: string; label: string }> = {
+    const configs: Record<UserRole, { className: string; label: string }> = {
       coordinator: { className: 'bg-[#5C001F] border-[#5C001F] text-white', label: 'Coordinator' },
       lecturer: { className: 'bg-[#10B981] border-[#10B981] text-white', label: 'Lecturer' },
-      onleave: { className: 'bg-amber-400 border-amber-400 text-amber-900', label: 'On Leave' },
     };
     const config = configs[user.role] ?? configs['lecturer'];
     return (
@@ -44,6 +43,22 @@ export function UnifiedTopNav({ notificationCount = 3 }: UnifiedTopNavProps) {
         {config.label}
       </Badge>
     );
+  };
+
+  const getStatusBadge = () => {
+    if (!user?.status) return null;
+    const configs: Record<StaffStatus, { className: string; label: string }> = {
+      onleave: { className: 'bg-amber-400 border-amber-400 text-amber-900', label: 'On Leave' },
+      adjunct: { className: 'bg-sky-100 border-sky-200 text-sky-900', label: 'Adjunct' },
+      seconded: { className: 'bg-violet-100 border-violet-200 text-violet-900', label: 'Seconded' },
+      null: { className: '', label: '' },
+    };
+    const config = configs[user.status];
+    return config.label ? (
+      <Badge className={`${config.className} text-xs ml-2`}>
+        {config.label}
+      </Badge>
+    ) : null;
   };
 
   return (
@@ -104,6 +119,7 @@ export function UnifiedTopNav({ notificationCount = 3 }: UnifiedTopNavProps) {
                     {user ? `${user.firstName} ${user.lastName}` : 'User'}
                   </span>
                   {getRoleBadge()}
+                  {getStatusBadge()}
                 </div>
                 <ChevronDown className="w-4 h-4 text-white/70" />
               </DropdownMenuTrigger>

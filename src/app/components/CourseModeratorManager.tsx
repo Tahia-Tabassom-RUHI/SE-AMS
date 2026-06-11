@@ -12,6 +12,8 @@ import {
   TooltipTrigger,
 } from './ui/tooltip';
 import type { Staff } from '../types';
+import { mockStaff } from '../data/mockData';
+import { useAppData } from '../contexts/AppDataContext';
 
 interface CourseAssignment {
   id: string;
@@ -27,16 +29,6 @@ interface CourseAssignment {
   moderator2: Staff | null;
   yearLevel: number;
 }
-
-const mockStaff: Staff[] = [
-  { id: 'staff-1', name: 'Dr. Aisyah Rahman', currentLoad: 9.0, status: 'available' },
-  { id: 'staff-2', name: 'Prof. Muhammad Ali', currentLoad: 12.0, status: 'available' },
-  { id: 'staff-3', name: 'Dr. Siti Aminah', currentLoad: 13.0, status: 'warning' },
-  { id: 'staff-5', name: 'Dr. Fatimah Zahra', currentLoad: 6.0, status: 'available' },
-  { id: 'staff-6', name: 'Prof. Ibrahim Malik', currentLoad: 0, status: 'available' },
-  { id: 'staff-7', name: 'Dr. Noor Hayati', currentLoad: 14.0, status: 'warning' },
-  { id: 'staff-coordinator', name: 'Dr. Zatul Alwani', currentLoad: 6.0, status: 'available' },
-];
 
 const mockAssignments: CourseAssignment[] = [
   {
@@ -108,6 +100,7 @@ const mockAssignments: CourseAssignment[] = [
 ];
 
 export function CourseModeratorManager() {
+  const { staff } = useAppData();
   const [assignments, setAssignments] = useState<CourseAssignment[]>(mockAssignments);
   const [semester, setSemester] = useState('Spring 2026');
   const [yearLevel, setYearLevel] = useState('all');
@@ -132,9 +125,9 @@ export function CourseModeratorManager() {
 
   const getAvailableModerators = (assignmentId: string, excludeModeratorId?: string) => {
     const assignment = assignments.find(a => a.id === assignmentId);
-    if (!assignment) return mockStaff;
+    if (!assignment) return staff;
 
-    return mockStaff.filter(staff => {
+    return staff.filter(staff => {
       // Exclude the assigned lecturer
       if (staff.name === assignment.lecturer.name) return false;
       // Exclude the other moderator if already assigned
