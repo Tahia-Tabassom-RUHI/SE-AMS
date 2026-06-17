@@ -71,8 +71,8 @@ export function LecturerDashboard() {
     { color: '#8B5CF6', label: 'Research Activity' },
     { color: '#EAB308', label: 'Grant Activity' },
     ...(user?.status === 'onleave' ? [
-      { color: '#F59E0B', label: '🟡 Leave Expiry' },
-      { color: '#F59E0B', label: '🟡 My Leave Period' },
+      { color: '#F59E0B', label: 'Leave Expiry' },
+      { color: '#F59E0B', label: 'My Leave Period' },
     ] : []),
   ];
 
@@ -97,7 +97,7 @@ export function LecturerDashboard() {
       </div>
 
       {/* Current Status Widget */}
-      <div className="grid grid-cols-2 gap-6 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6">
         <div className="bg-white rounded-lg border border-[#c5c5c5] p-6 shadow-sm">
           <div className="flex items-center justify-between">
             <div>
@@ -158,15 +158,15 @@ export function LecturerDashboard() {
             <p className="text-xs font-medium" style={{ color }}>{label}</p>
           </div>
         </div>
-        <div className="grid grid-cols-3 gap-4 mt-6 pt-4 border-t border-[#c5c5c5]">
-          <div className="flex items-center gap-2"><div className="w-3 h-3 rounded-full bg-[#F59E0B]"></div><span className="text-xs text-gray-700">Under 12: Under-allocated</span></div>
-          <div className="flex items-center gap-2"><div className="w-3 h-3 rounded-full bg-[#10B981]"></div><span className="text-xs text-gray-700">12-15: Optimal Range</span></div>
-          <div className="flex items-center gap-2"><div className="w-3 h-3 rounded-full bg-[#EF4444]"></div><span className="text-xs text-gray-700">Over 15: Over-allocated</span></div>
+        <div className="flex flex-wrap gap-4 mt-6 pt-4 border-t border-[#c5c5c5]">
+          <div className="flex items-center gap-2"><div className="w-3 h-3 rounded-full bg-[#F59E0B] flex-shrink-0"></div><span className="text-xs text-gray-700">Under 12 — Under-allocated</span></div>
+          <div className="flex items-center gap-2"><div className="w-3 h-3 rounded-full bg-[#10B981] flex-shrink-0"></div><span className="text-xs text-gray-700">12–15 — Optimal Range</span></div>
+          <div className="flex items-center gap-2"><div className="w-3 h-3 rounded-full bg-[#EF4444] flex-shrink-0"></div><span className="text-xs text-gray-700">Over 15 — Over-allocated</span></div>
         </div>
       </div>
 
       {/* Bottom row — 3 equal columns */}
-      <div className="grid grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
         {/* My Action Items */}
         <div className="bg-white rounded-lg border border-[#c5c5c5] shadow-sm p-6">
           <div className="flex items-center justify-between mb-4">

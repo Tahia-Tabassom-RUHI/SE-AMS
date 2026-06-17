@@ -100,7 +100,7 @@ export function StudentSegmentation() {
       </div>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-4 gap-6 mb-4">
+      <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6 mb-4">
         <div className="bg-white rounded-lg border border-[#c5c5c5] p-6 shadow-sm">
           <div className="flex items-center justify-between mb-2">
             <div className="text-sm text-gray-600">Total Students</div>
@@ -193,7 +193,7 @@ export function StudentSegmentation() {
       {/* Segmentation Table */}
       <div className="bg-white rounded-lg border border-[#c5c5c5] shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full">
+          <table className="w-full min-w-[640px]">
             <thead className="bg-[#F9FAFB] border-b border-[#c5c5c5]">
               <tr>
                 <th className="px-6 py-4 text-left text-xs font-semibold text-[#6B7280] uppercase tracking-wider">Course Code</th>

@@ -1,4 +1,4 @@
-import { Bell, ChevronDown, LogOut } from 'lucide-react';
+import { Bell, ChevronDown, LogOut, Menu } from 'lucide-react';
 import utmLogo from '@/imports/logo-512x512-1-1.jpg';
 import { useNavigate } from 'react-router';
 import { useAuth, UserRole, StaffStatus } from '../contexts/AuthContext';
@@ -15,9 +15,10 @@ import {
 
 interface UnifiedTopNavProps {
   notificationCount?: number;
+  onMenuClick?: () => void;
 }
 
-export function UnifiedTopNav({ notificationCount = 3 }: UnifiedTopNavProps) {
+export function UnifiedTopNav({ notificationCount = 3, onMenuClick }: UnifiedTopNavProps) {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -49,8 +50,8 @@ export function UnifiedTopNav({ notificationCount = 3 }: UnifiedTopNavProps) {
     if (!user?.status) return null;
     const configs: Record<StaffStatus, { className: string; label: string }> = {
       onleave: { className: 'bg-amber-400 border-amber-400 text-amber-900', label: 'On Leave' },
-      adjunct: { className: 'bg-sky-100 border-sky-200 text-sky-900', label: 'Adjunct' },
-      seconded: { className: 'bg-violet-100 border-violet-200 text-violet-900', label: 'Seconded' },
+      adjunct: { className: 'bg-sky-100 border-sky-200 text-sky-900', label: 'Hired (External)' },
+      seconded: { className: 'bg-violet-100 border-violet-200 text-violet-900', label: 'Borrowed' },
       null: { className: '', label: '' },
     };
     const config = configs[user.status];
@@ -63,19 +64,17 @@ export function UnifiedTopNav({ notificationCount = 3 }: UnifiedTopNavProps) {
 
   return (
     <header className="sticky top-0 z-50 flex flex-col">
-      {/* Top bar: logo area (light) + maroon nav bar */}
+      {/* Top bar: logo area (desktop only) + maroon nav bar */}
       <div className="flex h-16">
-        {/* Logo area — matches sidebar width */}
-        <div className="w-64 flex-shrink-0 bg-[#F4F4F4] flex items-center pl-4 pr-10 relative">
+        {/* Logo area — visible only on lg+ where permanent sidebar exists */}
+        <div className="hidden lg:flex w-64 flex-shrink-0 bg-[#F4F4F4] items-center pl-4 pr-10 relative">
           <div className="flex items-center gap-[10px]">
-            {/* FIX 1: circular crop, 44×44 */}
             <img
               src={utmLogo}
               alt="UTM emblem"
               className="flex-shrink-0 object-cover rounded-full"
               style={{ width: 44, height: 44 }}
             />
-            {/* FIX 2: larger white text, Poppins Bold, two lines */}
             <div className="leading-tight">
               <p style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: 13, letterSpacing: '0.5px', color: '#900021', textTransform: 'uppercase', margin: 0 }}>
                 Universiti Teknologi
@@ -85,7 +84,7 @@ export function UnifiedTopNav({ notificationCount = 3 }: UnifiedTopNavProps) {
               </p>
             </div>
           </div>
-          {/* FIX 3: diagonal slant — maroon triangle covers right edge, content stays left of it */}
+          {/* Diagonal slant between logo area and maroon bar */}
           <div
             className="absolute right-0 top-0 h-full w-10"
             style={{
@@ -96,9 +95,29 @@ export function UnifiedTopNav({ notificationCount = 3 }: UnifiedTopNavProps) {
         </div>
 
         {/* Maroon navigation bar */}
-        <div className="flex-1 bg-[#900021] flex items-center justify-end px-6">
-          <div className="flex items-center gap-4">
-            <button className="relative p-1.5 hover:bg-white/10 rounded transition-colors">
+        <div className="flex-1 bg-[#900021] flex items-center justify-between px-4 sm:px-6">
+          {/* Left: hamburger on tablet/phone + system name on mobile */}
+          <div className="flex items-center gap-3">
+            {/* Hamburger — hidden on lg+ where sidebar is permanently visible */}
+            <button
+              onClick={onMenuClick}
+              className="lg:hidden p-1.5 hover:bg-white/10 rounded transition-colors"
+              aria-label="Open navigation menu"
+            >
+              <Menu className="w-5 h-5 text-white" />
+            </button>
+            {/* System name on mobile only — lg+ has the sub-bar */}
+            <span className="lg:hidden text-white text-sm font-medium truncate" style={{ fontFamily: 'Poppins, sans-serif' }}>
+              SE-AMS
+            </span>
+          </div>
+
+          {/* Right: notifications + user menu */}
+          <div className="flex items-center gap-3 sm:gap-4">
+            <button
+              className="relative p-1.5 hover:bg-white/10 rounded transition-colors"
+              aria-label="Notifications"
+            >
               <Bell className="w-5 h-5 text-white" />
               {notificationCount > 0 && (
                 <span className="absolute top-0 right-0 w-4 h-4 bg-[#F59E0B] text-white text-[10px] font-bold rounded-full flex items-center justify-center">
@@ -109,19 +128,19 @@ export function UnifiedTopNav({ notificationCount = 3 }: UnifiedTopNavProps) {
 
             <DropdownMenu>
               <DropdownMenuTrigger className="flex items-center gap-2 hover:bg-white/10 px-2 py-1 rounded transition-colors">
-                <Avatar className="w-7 h-7">
+                <Avatar className="w-7 h-7 flex-shrink-0">
                   <AvatarFallback className="bg-[#5C001F] text-white text-xs font-bold" style={{ fontFamily: 'Poppins, sans-serif' }}>
                     {getInitials()}
                   </AvatarFallback>
                 </Avatar>
-                <div className="flex items-center">
-                  <span className="text-white text-sm" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                <div className="hidden sm:flex items-center min-w-0">
+                  <span className="text-white text-sm truncate max-w-[120px]" style={{ fontFamily: 'Poppins, sans-serif' }}>
                     {user ? `${user.firstName} ${user.lastName}` : 'User'}
                   </span>
                   {getRoleBadge()}
                   {getStatusBadge()}
                 </div>
-                <ChevronDown className="w-4 h-4 text-white/70" />
+                <ChevronDown className="w-4 h-4 text-white/70 flex-shrink-0" />
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">
                 <DropdownMenuLabel>
@@ -148,8 +167,8 @@ export function UnifiedTopNav({ notificationCount = 3 }: UnifiedTopNavProps) {
         </div>
       </div>
 
-      {/* FIX 4: site name bar — 28px tall, text aligned to sidebar left edge */}
-      <div className="bg-[#5C001F] flex items-center" style={{ height: 28 }}>
+      {/* System name sub-bar — desktop only */}
+      <div className="hidden lg:flex bg-[#5C001F] items-center" style={{ height: 28 }}>
         <span className="text-white" style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400, fontSize: 13, paddingLeft: 16 }}>
           SE Academic Management System — MJIIT
         </span>

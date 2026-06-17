@@ -111,7 +111,7 @@ export function StaffActivityTracker() {
       </div>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-4 gap-6 mb-6">
+      <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6 mb-6">
         <div className="bg-white rounded-lg border border-[#c5c5c5] p-6 shadow-sm">
           <div className="text-sm text-gray-600 mb-1">Total Activities</div>
           <div className="text-3xl font-bold text-gray-900">{activities.length}</div>
@@ -137,7 +137,7 @@ export function StaffActivityTracker() {
       {/* Activity Table */}
       <div className="bg-white rounded-lg border border-[#c5c5c5] shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full">
+          <table className="w-full min-w-[580px]">
             <thead className="bg-gray-50 border-b border-[#c5c5c5]">
               <tr>
                 <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">

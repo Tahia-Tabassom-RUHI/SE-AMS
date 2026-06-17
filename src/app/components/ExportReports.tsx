@@ -256,7 +256,7 @@ export function ExportReports() {
                     id={scope.id}
                     checked={scope.checked}
                     onCheckedChange={() => toggleScope(scope.id)}
-                    className="data-[state=checked]:bg-[#7B1C2E] data-[state=checked]:border-[#7B1C2E]"
+                    className="data-[state=checked]:bg-[#900021] data-[state=checked]:border-[#900021]"
                   />
                   <label
                     htmlFor={scope.id}
@@ -280,7 +280,7 @@ export function ExportReports() {
                 <RadioGroupItem
                   value="xlsx"
                   id="xlsx"
-                  className="data-[state=checked]:border-[#7B1C2E] data-[state=checked]:text-[#7B1C2E]"
+                  className="data-[state=checked]:border-[#900021] data-[state=checked]:text-[#900021]"
                 />
                 <label htmlFor="xlsx" className="text-sm font-medium cursor-pointer">
                   <span className="font-semibold">.xlsx</span>{' '}
@@ -292,7 +292,7 @@ export function ExportReports() {
                 <RadioGroupItem
                   value="csv"
                   id="csv"
-                  className="data-[state=checked]:border-[#7B1C2E] data-[state=checked]:text-[#7B1C2E]"
+                  className="data-[state=checked]:border-[#900021] data-[state=checked]:text-[#900021]"
                 />
                 <label htmlFor="csv" className="text-sm font-medium cursor-pointer">
                   <span className="font-semibold">.csv</span> — Comma-separated values
@@ -313,7 +313,7 @@ export function ExportReports() {
           <Button
             onClick={handleGenerate}
             disabled={isGenerating}
-            className="w-full h-14 bg-[#7B1C2E] hover:bg-[#5C001F] text-base font-bold shadow-md"
+            className="w-full h-14 bg-[#900021] hover:bg-[#5C001F] text-base font-bold shadow-md"
           >
             <FileText className="w-5 h-5 mr-2" />
             {isGenerating ? 'Generating Report...' : 'Generate Full Report'}
@@ -323,7 +323,7 @@ export function ExportReports() {
             <div className="mt-4">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm text-gray-600">Processing data...</span>
-                <span className="text-sm font-medium text-[#7B1C2E]">{progress}%</span>
+                <span className="text-sm font-medium text-[#900021]">{progress}%</span>
               </div>
               <Progress value={progress} className="h-2" />
             </div>
@@ -341,14 +341,14 @@ export function ExportReports() {
           </div>
 
           {/* Sheet tab switcher */}
-          <div className="px-6 pt-4 pb-0 flex gap-1 border-b border-gray-200">
+          <div className="px-6 pt-4 pb-0 flex gap-1 border-b border-gray-200 overflow-x-auto">
             {PREVIEW_SHEETS.map(sheet => (
               <button
                 key={sheet.key}
                 onClick={() => setActiveSheet(sheet.key)}
                 className={`px-4 py-2 text-xs font-medium rounded-t transition-colors border-b-2 -mb-px ${
                   activeSheet === sheet.key
-                    ? 'bg-white text-[#7B1C2E] border-[#7B1C2E]'
+                    ? 'bg-white text-[#900021] border-[#900021]'
                     : 'bg-gray-100 text-gray-500 border-transparent hover:text-gray-700'
                 }`}
               >
@@ -407,7 +407,7 @@ export function ExportReports() {
                 onClick={() => setActiveSheet(sheet.key)}
                 className={`px-3 py-1 text-xs rounded-t border border-b-0 mr-0.5 transition-colors ${
                   activeSheet === sheet.key
-                    ? 'bg-white text-[#7B1C2E] border-gray-300 font-medium'
+                    ? 'bg-white text-[#900021] border-gray-300 font-medium'
                     : 'bg-gray-200 text-gray-500 border-gray-300 hover:bg-gray-50'
                 }`}
               >

@@ -264,7 +264,7 @@ function ValidationSummary({
 
   return (
     <div className="space-y-5">
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="bg-white rounded-xl border border-[#c5c5c5] shadow-sm px-5 py-4 text-center">
           <div className="text-3xl font-semibold text-[#900021]">{assignedCount}</div>
           <div className="text-sm text-gray-500 mt-1">Sections Assigned</div>
@@ -450,7 +450,7 @@ function LabConfiguration() {
       <div className="flex justify-end mb-4">
         <button
           onClick={openAdd}
-          className="flex items-center gap-2 px-4 py-2.5 bg-[#7B1A2A] hover:bg-[#5C001F] text-white text-sm font-medium rounded-md transition-colors"
+          className="flex items-center gap-2 px-4 py-2.5 bg-[#900021] hover:bg-[#5C001F] text-white text-sm font-medium rounded-md transition-colors"
         >
           <Plus className="w-4 h-4" />
           Add New Lab
@@ -474,7 +474,7 @@ function LabConfiguration() {
                 <td className="px-6 py-4 text-sm font-medium text-[#111827] text-center">{lab.capacity}</td>
                 <td className="px-6 py-4">
                   <div className="flex items-center justify-center gap-4">
-                    <button onClick={() => openEdit(lab)} className="text-[#6B7280] hover:text-[#7B1A2A] transition-colors" title="Edit">
+                    <button onClick={() => openEdit(lab)} className="text-[#6B7280] hover:text-[#900021] transition-colors" title="Edit">
                       <Pencil className="w-4 h-4" />
                     </button>
                     <button onClick={() => handleDelete(lab)} className="text-[#6B7280] hover:text-[#DC2626] transition-colors" title="Delete">
@@ -492,7 +492,7 @@ function LabConfiguration() {
       {modalMode !== null && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
           <div className="absolute inset-0 bg-black/40" onClick={closeModal} />
-          <div className="relative bg-white rounded-xl shadow-2xl p-6 z-10" style={{ width: '440px' }}>
+          <div className="relative bg-white rounded-xl shadow-2xl p-6 z-10 w-[calc(100vw-2rem)] max-w-[440px]">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-lg font-medium text-[#111827]">
                 {modalMode === 'add' ? 'Add New Lab' : 'Edit Lab'}
@@ -513,7 +513,7 @@ function LabConfiguration() {
                   value={formName}
                   onChange={e => { setFormName(e.target.value); setNameError(false); }}
                   placeholder="e.g. Lab A-101"
-                  className={`w-full h-10 px-3 text-sm text-[#111827] border rounded-md focus:outline-none focus:ring-2 focus:ring-[#7B1A2A] focus:border-transparent ${nameError ? 'border-[#DC2626]' : 'border-[#E5E7EB]'}`}
+                  className={`w-full h-10 px-3 text-sm text-[#111827] border rounded-md focus:outline-none focus:ring-2 focus:ring-[#900021] focus:border-transparent ${nameError ? 'border-[#DC2626]' : 'border-[#E5E7EB]'}`}
                 />
                 {nameError && (
                   <div className="mt-2 mb-1 px-3 py-2 bg-[#FEE2E2] border-l-[3px] border-[#DC2626] rounded text-xs font-medium text-[#991B1B]">
@@ -534,7 +534,7 @@ function LabConfiguration() {
                   onChange={e => setFormCapacity(e.target.value)}
                   placeholder="e.g. 40"
                   min="1"
-                  className="h-10 px-3 text-sm text-[#111827] border border-[#E5E7EB] rounded-md focus:outline-none focus:ring-2 focus:ring-[#7B1A2A] focus:border-transparent"
+                  className="h-10 px-3 text-sm text-[#111827] border border-[#E5E7EB] rounded-md focus:outline-none focus:ring-2 focus:ring-[#900021] focus:border-transparent"
                   style={{ width: '120px' }}
                 />
                 <p className="text-xs text-[#6B7280] mt-1.5">Used for enrollment vs capacity validation.</p>
@@ -545,7 +545,7 @@ function LabConfiguration() {
               <button onClick={closeModal} className="px-4 py-2.5 text-sm font-medium text-[#374151] bg-white border border-[#E5E7EB] rounded-md hover:bg-gray-50 transition-colors">
                 Cancel
               </button>
-              <button onClick={handleSave} className="px-5 py-2.5 text-sm font-medium text-white bg-[#7B1A2A] hover:bg-[#5C001F] rounded-md transition-colors">
+              <button onClick={handleSave} className="px-5 py-2.5 text-sm font-medium text-white bg-[#900021] hover:bg-[#5C001F] rounded-md transition-colors">
                 {modalMode === 'add' ? 'Save Lab' : 'Save Changes'}
               </button>
             </div>
@@ -664,7 +664,7 @@ export function LabResourcePlanner() {
                   className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
                     hasViolations || assignedCount === 0
                       ? 'bg-[#D1D5DB] text-white cursor-not-allowed opacity-60'
-                      : 'bg-[#900021] hover:bg-[#1d4ed8] text-white shadow-sm active:scale-[0.99]'
+                      : 'bg-[#900021] hover:bg-[#5C001F] text-white shadow-sm active:scale-[0.99]'
                   }`}
                 >
                   <Save className="w-4 h-4" />
@@ -781,8 +781,9 @@ export function LabResourcePlanner() {
               </div>
             </div>
 
-            {/* Table — 7 columns */}
-            <div className="bg-white rounded-xl border border-[#c5c5c5] shadow-sm overflow-visible">
+            {/* Table — 7 columns: horizontal scroll on smaller screens */}
+            <div className="overflow-x-auto">
+            <div className="bg-white rounded-xl border border-[#c5c5c5] shadow-sm overflow-visible min-w-[900px]">
               {/* Header */}
               <div className="grid gap-0 border-b border-[#c5c5c5] bg-[#F4F4F4] px-5 py-3 rounded-t-xl"
                 style={{ gridTemplateColumns: '2fr 1fr 110px 180px 160px 170px 90px' }}>
@@ -935,6 +936,7 @@ export function LabResourcePlanner() {
                 <span>Unassigned</span>
               </div>
             </div>
+            </div>{/* end overflow-x-auto wrapper */}
           </div>
         )}
 

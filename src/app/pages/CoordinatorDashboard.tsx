@@ -91,7 +91,7 @@ export function CoordinatorDashboard() {
       </div>
 
       {/* Task Status Overview - 3 cards */}
-      <div className="grid grid-cols-3 gap-6 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-6">
         <div className="bg-white rounded-lg border border-[#c5c5c5] p-6 shadow-sm">
           <div className="flex items-center justify-between">
             <div>
@@ -132,9 +132,9 @@ export function CoordinatorDashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-6 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 items-start">
         {/* Priority Alerts */}
-        <div className="col-span-2 h-full">
+        <div className="lg:col-span-2 h-full">
           <div className="bg-white rounded-lg border border-[#c5c5c5] shadow-sm h-full flex flex-col">
             <div className="p-6 border-b border-[#c5c5c5]">
               <h2 className="text-xl">Priority Alerts</h2>
@@ -178,13 +178,13 @@ export function CoordinatorDashboard() {
         </div>
 
         {/* Department Snapshot */}
-        <div className="col-span-1 h-full">
+        <div className="lg:col-span-1 h-full">
           <div className="bg-white rounded-lg border border-[#c5c5c5] shadow-sm p-6 h-full flex flex-col">
             <h2 className="text-lg font-semibold mb-1">Department Snapshot</h2>
             <p className="text-sm text-gray-600 mb-4">Current semester staff workload overview</p>
 
             {/* Summary Row */}
-            <div className="grid grid-cols-3 gap-3 mb-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
               <div className="text-center">
                 <div className="text-2xl font-bold text-[#10B981]">5</div>
                 <div className="text-xs text-gray-600 mt-1">At Optimal Load</div>

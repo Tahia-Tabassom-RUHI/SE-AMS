@@ -71,7 +71,7 @@ export function Login() {
           <h1 className="text-3xl font-bold text-white mb-2">
             SE Academic Management
           </h1>
-          <p className="text-blue-100">
+          <p className="text-white/80">
             Universiti Teknologi Malaysia
           </p>
         </div>
@@ -172,7 +172,7 @@ export function Login() {
           </div>
         </div>
 
-        <p className="text-center text-blue-100 text-sm mt-6">
+        <p className="text-center text-white/80 text-sm mt-6">
           © 2026 UTM. All rights reserved.
         </p>
       </div>

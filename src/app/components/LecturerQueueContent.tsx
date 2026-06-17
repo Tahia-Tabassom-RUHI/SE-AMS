@@ -30,12 +30,16 @@ export function LecturerQueueContent() {
   const pendingCredits = requests.reduce((sum, req) => sum + req.credits, 0);
   const projectedTotal = currentLoad + pendingCredits;
 
+  // Decline is blocked for lecturers below the 12-credit minimum unless an exemption is active.
+  const isDeclineBlocked = user?.role === 'lecturer' && currentLoad < 12 && !isExemptionActive;
+
   const handleAccept = (request: AssignmentRequest) => {
     const newLoad = currentLoad + request.credits;
 
-    // Allow assignment if exempt, or if within 15-credit limit
-    if (!isExemptionActive && newLoad > 15) {
-      toast.error('Cannot accept: Would exceed 15-credit limit', {
+    // 15-credit maximum is always enforced regardless of exemption status.
+    // Exemption only waives the 12-credit minimum rejection floor.
+    if (newLoad > 15) {
+      toast.error('Cannot accept: Would exceed the 15-credit semester limit', {
         duration: 3000,
       });
       return;
@@ -55,13 +59,8 @@ export function LecturerQueueContent() {
   };
 
   const handleDecline = (request: AssignmentRequest) => {
-    if (user?.role === 'lecturer' && currentLoad < 12 && !isExemptionActive) {
-      toast.error(
-        'Rejection blocked: lecturers below 12 credits may only reject when an active leave or status exemption is approved.',
-        { duration: 5000 }
-      );
-      return;
-    }
+    // Guard: Decline button is disabled in QueueTable when isDeclineBlocked.
+    // This handler only runs when decline is permitted.
     setSelectedRequest(request);
     setDeclineModalOpen(true);
   };
@@ -118,6 +117,7 @@ export function LecturerQueueContent() {
         onHoverPreview={setHoveredCredits}
         onHoverEnd={() => setHoveredCredits(0)}
         isExemptionActive={isExemptionActive}
+        isDeclineBlocked={isDeclineBlocked}
       />
 
       <DeclineModal

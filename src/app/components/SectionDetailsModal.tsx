@@ -63,7 +63,7 @@ export function SectionDetailsModal({ open, onClose, section }: SectionDetailsMo
         }}>
           <div className="flex items-start justify-between">
             <div>
-              <div style={{ fontSize: '14px', fontWeight: 500, color: '#7B1A2A', marginBottom: '4px' }}>
+              <div style={{ fontSize: '14px', fontWeight: 500, color: '#900021', marginBottom: '4px' }}>
                 {section.courseCode}
               </div>
               <div style={{ fontSize: '11px', color: '#6B7280' }}>Course Code</div>
@@ -156,7 +156,7 @@ export function SectionDetailsModal({ open, onClose, section }: SectionDetailsMo
                     padding: '0 12px',
                     fontSize: '14px',
                     color: '#111827',
-                    border: '1px solid #7B1A2A',
+                    border: '1px solid #900021',
                     borderRadius: '6px',
                     marginTop: '8px',
                     outline: 'none',
@@ -315,7 +315,7 @@ export function SectionDetailsModal({ open, onClose, section }: SectionDetailsMo
                       padding: '0 12px',
                       fontSize: '14px',
                       color: '#111827',
-                      border: '1px solid #7B1A2A',
+                      border: '1px solid #900021',
                       borderRadius: '6px',
                       marginTop: '8px',
                       outline: 'none',
@@ -461,7 +461,7 @@ export function SectionDetailsModal({ open, onClose, section }: SectionDetailsMo
           <button
             onClick={handleSave}
             style={{
-              background: '#7B1A2A',
+              background: '#900021',
               color: 'white',
               fontSize: '14px',
               fontWeight: 500,

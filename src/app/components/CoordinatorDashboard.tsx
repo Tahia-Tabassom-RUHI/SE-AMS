@@ -171,7 +171,7 @@ export function CoordinatorDashboard() {
                             disabled={!canSave}
                             className={
                               canSave
-                                ? 'bg-[#900021] hover:bg-[#1d4ed8] h-11 shadow-sm'
+                                ? 'bg-[#900021] hover:bg-[#5C001F] h-11 shadow-sm'
                                 : 'bg-[#D1D5DB] hover:bg-[#D1D5DB] cursor-not-allowed h-11'
                             }
                           >

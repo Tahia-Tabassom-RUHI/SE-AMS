@@ -22,7 +22,7 @@ export function SummaryBar({ pendingCount, currentLoad, nextDeadline, isExemptio
   const isUrgent = nextDeadline ? (nextDeadline - Date.now()) < (1000 * 60 * 60 * 48) : false;
 
   return (
-    <div className="grid grid-cols-3 gap-6 mb-6">
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-6">
       {/* Pending Requests */}
       <div className="bg-white rounded-lg border border-[#c5c5c5] p-6 shadow-sm">
         <div className="flex items-center justify-between mb-2">

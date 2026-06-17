@@ -259,7 +259,7 @@ export function CourseModeratorManager() {
             </button>
           )}
         </div>
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Semester</label>
             <select
@@ -290,7 +290,7 @@ export function CourseModeratorManager() {
       </div>
 
       {/* Summary Cards — moved above table */}
-      <div className="grid grid-cols-3 gap-6 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-6">
         <div className="bg-white rounded-lg border border-[#c5c5c5] p-4 shadow-sm">
           <div className="text-sm text-gray-600 mb-1">Total Assignments</div>
           <div className="text-2xl font-bold text-gray-900">{filteredAssignments.length}</div>
@@ -312,7 +312,7 @@ export function CourseModeratorManager() {
       {/* Master Oversight Table */}
       <div className="bg-white rounded-lg border border-[#c5c5c5] shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full">
+          <table className="w-full min-w-[860px]">
             <thead className="bg-gray-50 border-b border-[#c5c5c5]">
               <tr>
                 <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">

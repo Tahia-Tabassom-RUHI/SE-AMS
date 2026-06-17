@@ -211,8 +211,9 @@ export function AssignmentTool() {
     <>
       {/* Error Banner */}
       {showError && (
-        <div className="bg-[#DC2626] text-white px-6 py-3 text-sm font-medium -m-8 mb-8">
-          ⚠ Assignment Blocked: Policy Violation (FR-03) - Would exceed 15-credit limit
+        <div className="bg-[#DC2626] text-white px-4 py-3 text-sm font-medium rounded-lg mb-4 flex items-center gap-2">
+          <span aria-hidden="true">⚠</span>
+          <span>Assignment blocked — this would exceed the 15-credit semester limit (FR-03).</span>
         </div>
       )}
 
@@ -260,9 +261,9 @@ export function AssignmentTool() {
             </button>{' '}
             to browse all unassigned sections.
           </p>
-        <div className="grid grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Left: Input Form */}
-          <div className="col-span-2 space-y-6">
+          <div className="lg:col-span-2 space-y-6">
             <div className="bg-white rounded-lg border border-[#c5c5c5] p-6 shadow-sm">
               <h2 className="text-xl mb-6 flex items-center gap-2">
                 Assignment Details
@@ -343,7 +344,7 @@ export function AssignmentTool() {
                   disabled={!canSave}
                   className={
                     canSave
-                      ? 'bg-[#900021] hover:bg-[#1d4ed8] h-11 shadow-sm'
+                      ? 'bg-[#900021] hover:bg-[#5C001F] h-11 shadow-sm'
                       : 'bg-[#D1D5DB] hover:bg-[#D1D5DB] cursor-not-allowed h-11'
                   }
                 >
@@ -354,7 +355,7 @@ export function AssignmentTool() {
           </div>
 
           {/* Right: Analytics & Workload Monitor */}
-          <div className="col-span-1 space-y-6">
+          <div className="lg:col-span-1 space-y-6">
             <WorkloadMonitor
               selectedLecturer={selectedLecturer}
               selectedCourse={selectedCourse}
@@ -410,11 +411,11 @@ export function AssignmentTool() {
 
           {/* Status Type Pill Selector */}
           <div className="mb-2">
-            <div className="flex gap-3">
+            <div className="flex flex-wrap gap-3">
               {([
                 { key: 'onleave', icon: CalendarDays, label: 'On Leave' },
-                { key: 'adjunct', icon: User, label: 'Adjunct Lecturer' },
-                { key: 'seconded', icon: ArrowRightLeft, label: 'Seconded Staff' },
+                { key: 'adjunct', icon: User, label: 'Hired from outside the university' },
+                { key: 'seconded', icon: ArrowRightLeft, label: 'Borrowed from another department' },
               ] as const).map(({ key, icon: Icon, label }) => (
                 <button
                   key={key}
@@ -457,7 +458,7 @@ export function AssignmentTool() {
                 </div>
 
                 <div className="mb-1">
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1.5">
                         Start Date <span className="text-red-500">*</span>
@@ -549,14 +550,14 @@ export function AssignmentTool() {
                     <textarea
                       value={adjunctReason}
                       onChange={e => setAdjunctReason(e.target.value)}
-                      placeholder="Briefly explain this lecturer's adjunct arrangement, e.g. external industry expert hired for one semester..."
+                      placeholder="Briefly explain the external lecturer arrangement, e.g. industry expert engaged for one semester..."
                       rows={4}
                       className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#900021] focus:border-transparent resize-none"
                     />
                   </div>
                 )}
 
-                <p className="text-xs text-gray-500 mb-4">Adjunct status does not appear on the department calendar.</p>
+                <p className="text-xs text-gray-500 mb-4">Hired-from-outside status does not appear on the department calendar.</p>
 
                 <div className="bg-amber-50 border-l-4 border-amber-400 rounded-r-lg p-3 mb-5">
                   <p className="text-xs text-amber-800">
@@ -568,7 +569,7 @@ export function AssignmentTool() {
                   disabled={!adjunctActive}
                   onClick={() => {
                     if (!adjunctActive || !adjunctReason.trim()) {
-                      toast.error('Please provide a reason for adjunct status', { duration: 3000 });
+                      toast.error('Please provide a reason for the hired-from-outside status.', { duration: 3000 });
                       return;
                     }
 
@@ -585,7 +586,7 @@ export function AssignmentTool() {
                     );
                     if (updated) setSelectedStatusStaff(updated);
 
-                    toast.success(`Adjunct status saved for ${selectedStatusStaff.name}`, { duration: 3000 });
+                    toast.success(`Hired-from-outside status saved for ${selectedStatusStaff.name}.`, { duration: 3000 });
                     setAdjunctActive(false);
                     setAdjunctReason('');
                   }}
@@ -639,7 +640,7 @@ export function AssignmentTool() {
                       <textarea
                         value={secondedReason}
                         onChange={e => setSecondedReason(e.target.value)}
-                        placeholder="Briefly explain the secondment arrangement..."
+                        placeholder="Briefly explain the borrowed-staff arrangement…"
                         rows={3}
                         className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#900021] focus:border-transparent resize-none"
                       />
@@ -647,7 +648,7 @@ export function AssignmentTool() {
                   </div>
                 )}
 
-                <p className="text-xs text-gray-500 mb-4">Seconded staff status does not appear on the department calendar.</p>
+                <p className="text-xs text-gray-500 mb-4">Borrowed-from-another-department status does not appear on the department calendar.</p>
 
                 <div className="bg-amber-50 border-l-4 border-amber-400 rounded-r-lg p-3 mb-5">
                   <p className="text-xs text-amber-800">
@@ -676,7 +677,7 @@ export function AssignmentTool() {
                     );
                     if (updated) setSelectedStatusStaff(updated);
 
-                    toast.success(`Seconded status saved for ${selectedStatusStaff.name}`, { duration: 3000 });
+                    toast.success(`Borrowed-from-another-department status saved for ${selectedStatusStaff.name}.`, { duration: 3000 });
                     setSecondedActive(false);
                     setHomeDepartment('');
                     setSecondedReason('');
@@ -720,12 +721,18 @@ export function AssignmentTool() {
                         <td className="px-6 py-4 font-medium text-gray-900">{person.name}</td>
                         <td className="px-6 py-4 text-sm text-gray-700">
                           {person.exemptionType === 'Adjunct Status'
-                            ? 'Adjunct Lecturer'
+                            ? 'Hired from outside the university'
                             : person.exemptionType === 'Borrowed Staff'
-                            ? 'Seconded Staff'
+                            ? 'Borrowed from another department'
                             : 'On Leave'}
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-700">{person.exemptionType}</td>
+                        <td className="px-6 py-4 text-sm text-gray-700">
+                          {person.exemptionType === 'Adjunct Status'
+                            ? 'Hired from outside the university'
+                            : person.exemptionType === 'Borrowed Staff'
+                            ? 'Borrowed from another department'
+                            : person.exemptionType ?? '—'}
+                        </td>
                         <td className="px-6 py-4 text-sm text-gray-700">
                           {person.exemptionStartDate && person.exemptionExpiryDate
                             ? `${new Date(person.exemptionStartDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} — ${new Date(person.exemptionExpiryDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`

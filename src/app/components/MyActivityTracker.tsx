@@ -1,5 +1,5 @@
 import { useState, useMemo, useRef } from 'react';
-import { Edit2, Trash2, Calendar, X, Loader2, Download, AlertTriangle, CheckCircle2, Upload, FileText } from 'lucide-react';
+import { Edit2, Trash2, Calendar, X, Loader2, Download, AlertTriangle, CheckCircle2, Upload, FileText, Plus } from 'lucide-react';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Input } from './ui/input';
@@ -11,6 +11,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from './ui/select';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from './ui/alert-dialog';
 import { AddActivityModal } from './AddActivityModal';
 import type { StaffActivity } from '../types';
 import { useActivityContext } from '../contexts/ActivityContext';
@@ -21,6 +31,7 @@ export function MyActivityTracker() {
   const [modalOpen, setModalOpen] = useState(false);
   const [editingActivity, setEditingActivity] = useState<StaffActivity | null>(null);
   const [activeTab, setActiveTab] = useState<'my-activities' | 'add-activity'>('my-activities');
+  const [deleteTarget, setDeleteTarget] = useState<StaffActivity | null>(null);
 
   // Filter states
   const [selectedType, setSelectedType] = useState<string>('all');
@@ -117,9 +128,14 @@ export function MyActivityTracker() {
     setModalOpen(true);
   };
 
-  const handleDelete = (activityId: string) => {
-    if (confirm('Are you sure you want to delete this activity?')) {
-      deleteActivity(activityId);
+  const handleDelete = (activity: StaffActivity) => {
+    setDeleteTarget(activity);
+  };
+
+  const confirmDelete = () => {
+    if (deleteTarget) {
+      deleteActivity(deleteTarget.id);
+      setDeleteTarget(null);
     }
   };
 
@@ -284,7 +300,7 @@ export function MyActivityTracker() {
           {hasActiveFilters && (
             <button
               onClick={clearFilters}
-              className="text-sm text-[#900021] hover:text-[#1d4ed8] flex items-center gap-1"
+              className="text-sm text-[#900021] hover:text-[#5C001F] flex items-center gap-1"
             >
               <X className="w-4 h-4" />
               Clear All
@@ -292,7 +308,7 @@ export function MyActivityTracker() {
           )}
         </div>
 
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* Type Filter */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Type</label>
@@ -348,7 +364,7 @@ export function MyActivityTracker() {
       </div>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-4 gap-6 mb-6">
+      <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6 mb-6">
         <div className="bg-white rounded-lg border border-[#c5c5c5] p-6 shadow-sm">
           <div className="text-sm text-gray-600 mb-1">Total Activities</div>
           <div className="text-3xl font-bold text-gray-900">{filteredActivities.length}</div>
@@ -392,7 +408,7 @@ export function MyActivityTracker() {
       {/* Personal Activity Table */}
       <div className="bg-white rounded-lg border border-[#c5c5c5] shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full">
+          <table className="w-full min-w-[580px]">
             <thead className="bg-gray-50 border-b border-[#c5c5c5]">
               <tr>
                 <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
@@ -456,7 +472,7 @@ export function MyActivityTracker() {
                         <Edit2 className="w-4 h-4 text-[#900021]" />
                       </button>
                       <button
-                        onClick={() => handleDelete(activity.id)}
+                        onClick={() => handleDelete(activity)}
                         className="p-2 hover:bg-red-100 rounded-lg transition-colors"
                         title="Delete activity"
                       >
@@ -475,7 +491,7 @@ export function MyActivityTracker() {
             {activities.length === 0 ? (
               <>
                 <p className="mb-4">No activities logged yet.</p>
-                <Button onClick={handleAdd} className="bg-[#900021] hover:bg-[#1d4ed8]">
+                <Button onClick={handleAdd} className="bg-[#900021] hover:bg-[#5C001F]">
                   <Plus className="w-4 h-4 mr-2" />
                   Add Your First Activity
                 </Button>
@@ -483,7 +499,7 @@ export function MyActivityTracker() {
             ) : (
               <>
                 <p className="mb-4">No activities match the selected filters.</p>
-                <Button onClick={clearFilters} className="bg-[#900021] hover:bg-[#1d4ed8]">
+                <Button onClick={clearFilters} className="bg-[#900021] hover:bg-[#5C001F]">
                   <X className="w-4 h-4 mr-2" />
                   Clear Filters
                 </Button>
@@ -599,7 +615,7 @@ export function MyActivityTracker() {
 
                 <Button
                   onClick={handleSaveActivity}
-                  className="w-full bg-[#7B1A2A] hover:bg-[#5C001F]"
+                  className="w-full bg-[#900021] hover:bg-[#5C001F]"
                 >
                   Save Activity
                 </Button>
@@ -730,6 +746,27 @@ export function MyActivityTracker() {
           </div>
         </div>
       )}
+
+      {/* Delete confirmation dialog */}
+      <AlertDialog open={!!deleteTarget} onOpenChange={(open) => { if (!open) setDeleteTarget(null); }}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete activity?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This will remove{deleteTarget ? ` "${deleteTarget.title}"` : ' this activity'} from your activity records. This action cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={confirmDelete}
+              className="bg-red-600 hover:bg-red-700 text-white"
+            >
+              Delete Activity
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }

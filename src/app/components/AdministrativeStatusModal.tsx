@@ -106,8 +106,8 @@ export function AdministrativeStatusModal({
               className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#900021] focus:border-transparent bg-white text-gray-900"
             >
               <option value="Maternity Leave">Maternity Leave</option>
-              <option value="Adjunct Status">Adjunct Status</option>
-              <option value="Borrowed Staff">Borrowed Staff</option>
+              <option value="Adjunct Status">Hired from outside the university</option>
+              <option value="Borrowed Staff">Borrowed from another department</option>
             </select>
           </div>
 

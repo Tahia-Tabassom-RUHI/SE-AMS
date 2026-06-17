@@ -65,7 +65,7 @@ function SectionRow({ s, onAssign, onEdit }: { s: CourseSection; onAssign: (id: 
       {/* Course Section */}
       <td className="px-4 py-3">
         <div className="flex items-center gap-2 mb-0.5">
-          <span style={{ color: '#7B1A2A', fontSize: '14px', fontWeight: 500 }}>{s.courseCode}</span>
+          <span style={{ color: '#900021', fontSize: '14px', fontWeight: 500 }}>{s.courseCode}</span>
           <span style={{
             background: '#F1F5F9', color: '#475569', fontSize: '11px',
             borderRadius: '4px', padding: '1px 6px',
@@ -141,7 +141,7 @@ function SectionRow({ s, onAssign, onEdit }: { s: CourseSection; onAssign: (id: 
               onClick={() => onAssign(s.id)}
               className="hover:opacity-80 transition-opacity"
               style={{
-                background: '#7B1A2A', color: 'white',
+                background: '#900021', color: 'white',
                 fontSize: '11px', fontWeight: 500,
                 borderRadius: '4px', padding: '4px 10px',
                 border: 'none', cursor: 'pointer',
@@ -153,10 +153,10 @@ function SectionRow({ s, onAssign, onEdit }: { s: CourseSection; onAssign: (id: 
             <button
               className="hover:bg-[#FFF0F3] transition-colors"
               style={{
-                background: 'white', color: '#7B1A2A',
+                background: 'white', color: '#900021',
                 fontSize: '11px', fontWeight: 500,
                 borderRadius: '4px', padding: '4px 10px',
-                border: '0.5px solid #7B1A2A', cursor: 'pointer',
+                border: '0.5px solid #900021', cursor: 'pointer',
               }}
             >
               View
@@ -256,7 +256,7 @@ export function CourseCatalog() {
           onClick={openAdd}
           className="flex items-center gap-2 text-white hover:bg-[#5C001F] transition-colors"
           style={{
-            background: '#7B1A2A', fontSize: '14px', fontWeight: 500,
+            background: '#900021', fontSize: '14px', fontWeight: 500,
             borderRadius: '6px', padding: '10px 16px', border: 'none', cursor: 'pointer',
           }}
         >
@@ -267,7 +267,8 @@ export function CourseCatalog() {
 
       {/* Main Table Card */}
       <div style={{ background: 'white', border: '1px solid #E5E7EB', borderRadius: '8px', overflow: 'hidden' }}>
-        <table className="w-full" style={{ borderCollapse: 'collapse' }}>
+        <div className="overflow-x-auto">
+        <table className="w-full min-w-[600px]" style={{ borderCollapse: 'collapse' }}>
           <thead>
             <tr style={{ background: '#F9FAFB', height: '44px', borderBottom: '1px solid #E5E7EB' }}>
               <th className="px-4 text-left" style={{ fontSize: '12px', fontWeight: 500, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
@@ -305,13 +306,14 @@ export function CourseCatalog() {
             )}
           </tbody>
         </table>
+        </div>
       </div>
 
       {/* Add New Course Modal */}
       {showAddModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
           <div className="absolute inset-0 bg-black/40" onClick={closeAdd} />
-          <div className="relative bg-white rounded-xl shadow-2xl p-6 z-10" style={{ width: '460px' }}>
+          <div className="relative bg-white rounded-xl shadow-2xl p-6 z-10 w-[calc(100vw-2rem)] max-w-[460px]">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-lg font-medium text-[#111827]">Add New Course Section</h2>
               <button onClick={closeAdd} className="text-[#6B7280] hover:text-[#111827] transition-colors">
@@ -328,7 +330,7 @@ export function CourseCatalog() {
                     value={formCode}
                     onChange={e => setFormCode(e.target.value)}
                     placeholder="e.g. CS101"
-                    className="w-full h-10 px-3 text-sm text-[#111827] border border-[#E5E7EB] rounded-md focus:outline-none focus:ring-2 focus:ring-[#7B1A2A] focus:border-transparent"
+                    className="w-full h-10 px-3 text-sm text-[#111827] border border-[#E5E7EB] rounded-md focus:outline-none focus:ring-2 focus:ring-[#900021] focus:border-transparent"
                   />
                 </div>
                 <div>
@@ -338,7 +340,7 @@ export function CourseCatalog() {
                     value={formSection}
                     onChange={e => setFormSection(e.target.value)}
                     placeholder="e.g. 01"
-                    className="w-full h-10 px-3 text-sm text-[#111827] border border-[#E5E7EB] rounded-md focus:outline-none focus:ring-2 focus:ring-[#7B1A2A] focus:border-transparent"
+                    className="w-full h-10 px-3 text-sm text-[#111827] border border-[#E5E7EB] rounded-md focus:outline-none focus:ring-2 focus:ring-[#900021] focus:border-transparent"
                   />
                 </div>
               </div>
@@ -350,11 +352,11 @@ export function CourseCatalog() {
                   value={formName}
                   onChange={e => setFormName(e.target.value)}
                   placeholder="e.g. Introduction to Programming"
-                  className="w-full h-10 px-3 text-sm text-[#111827] border border-[#E5E7EB] rounded-md focus:outline-none focus:ring-2 focus:ring-[#7B1A2A] focus:border-transparent"
+                  className="w-full h-10 px-3 text-sm text-[#111827] border border-[#E5E7EB] rounded-md focus:outline-none focus:ring-2 focus:ring-[#900021] focus:border-transparent"
                 />
               </div>
 
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
                   <label className="block text-xs font-medium text-[#374151] mb-1.5">Credits *</label>
                   <input
@@ -363,7 +365,7 @@ export function CourseCatalog() {
                     onChange={e => setFormCredits(e.target.value)}
                     placeholder="3"
                     min="1" max="6"
-                    className="w-full h-10 px-3 text-sm text-[#111827] border border-[#E5E7EB] rounded-md focus:outline-none focus:ring-2 focus:ring-[#7B1A2A] focus:border-transparent"
+                    className="w-full h-10 px-3 text-sm text-[#111827] border border-[#E5E7EB] rounded-md focus:outline-none focus:ring-2 focus:ring-[#900021] focus:border-transparent"
                   />
                 </div>
                 <div>
@@ -371,7 +373,7 @@ export function CourseCatalog() {
                   <select
                     value={formYear}
                     onChange={e => setFormYear(e.target.value)}
-                    className="w-full h-10 px-3 text-sm text-[#111827] border border-[#E5E7EB] rounded-md focus:outline-none focus:ring-2 focus:ring-[#7B1A2A] focus:border-transparent"
+                    className="w-full h-10 px-3 text-sm text-[#111827] border border-[#E5E7EB] rounded-md focus:outline-none focus:ring-2 focus:ring-[#900021] focus:border-transparent"
                   >
                     <option value="">Year</option>
                     <option value="1">Y1</option>
@@ -388,7 +390,7 @@ export function CourseCatalog() {
                     onChange={e => setFormEnrollment(e.target.value)}
                     placeholder="e.g. 40"
                     min="1"
-                    className="w-full h-10 px-3 text-sm text-[#111827] border border-[#E5E7EB] rounded-md focus:outline-none focus:ring-2 focus:ring-[#7B1A2A] focus:border-transparent"
+                    className="w-full h-10 px-3 text-sm text-[#111827] border border-[#E5E7EB] rounded-md focus:outline-none focus:ring-2 focus:ring-[#900021] focus:border-transparent"
                   />
                 </div>
               </div>
@@ -403,7 +405,7 @@ export function CourseCatalog() {
               </button>
               <button
                 onClick={handleSave}
-                className="px-5 py-2.5 text-sm font-medium text-white bg-[#7B1A2A] hover:bg-[#5C001F] rounded-md transition-colors"
+                className="px-5 py-2.5 text-sm font-medium text-white bg-[#900021] hover:bg-[#5C001F] rounded-md transition-colors"
               >
                 Add Section
               </button>

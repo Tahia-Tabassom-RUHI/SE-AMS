@@ -133,9 +133,7 @@ export const router = createHashRouter([
             path: 'lab-planner',
             element: (
               <ProtectedRoute requiredRole="coordinator">
-                <div className="-m-8 p-8 bg-[#F4F4F4] min-h-full">
-                  <LabResourcePlanner />
-                </div>
+                <LabResourcePlanner />
               </ProtectedRoute>
             ),
           },

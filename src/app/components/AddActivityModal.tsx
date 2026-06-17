@@ -197,7 +197,7 @@ export function AddActivityModal({ open, onClose, onSave, activity }: AddActivit
           <Button variant="outline" onClick={onClose}>
             Cancel
           </Button>
-          <Button onClick={handleSave} className="bg-[#900021] hover:bg-[#1d4ed8]">
+          <Button onClick={handleSave} className="bg-[#900021] hover:bg-[#5C001F]">
             {activity ? 'Save Changes' : 'Add Activity'}
           </Button>
         </DialogFooter>
