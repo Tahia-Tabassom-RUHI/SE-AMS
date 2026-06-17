@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SE-AMS Documentation</title>
+  <meta name="description" content="SE Academic Management System — MJIIT Software Engineering Department" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%23900021'/><text x='16' y='22' text-anchor='middle' font-family='sans-serif' font-size='14' font-weight='bold' fill='white'>SE</text></svg>" />
+
+  <!-- Docsify theme -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css" />
+
+  <style>
+    :root {
+      --theme-color: #900021;
+      --sidebar-width: 280px;
+    }
+
+    /* Cover page */
+    section.cover .cover-main h1 {
+      color: #900021 !important;
+    }
+
+    section.cover .cover-main blockquote p {
+      color: #444;
+    }
+
+    section.cover .cover-main a:first-child {
+      background-color: #900021 !important;
+      border-color: #900021 !important;
+      color: #fff !important;
+    }
+
+    section.cover .cover-main a:first-child:hover {
+      background-color: #5C001F !important;
+      border-color: #5C001F !important;
+    }
+
+    section.cover .cover-main a:last-child {
+      border-color: #900021 !important;
+      color: #900021 !important;
+    }
+
+    /* Sidebar */
+    .sidebar .sidebar-nav a:hover,
+    .sidebar .sidebar-nav a.active {
+      color: #900021 !important;
+    }
+
+    .sidebar-toggle span {
+      background-color: #900021 !important;
+    }
+
+    /* Content headings */
+    .markdown-section h1,
+    .markdown-section h2 {
+      border-bottom-color: #e5e7eb;
+    }
+
+    /* Code blocks */
+    .markdown-section pre {
+      border-left: 4px solid #900021;
+    }
+
+    /* Alert/tip blocks */
+    .tip {
+      border-left-color: #900021 !important;
+    }
+
+    /* Tables */
+    .markdown-section table th {
+      background-color: #900021;
+      color: #fff;
+    }
+
+    .markdown-section table tr:nth-child(even) {
+      background-color: #fdf2f4;
+    }
+
+    /* Nav search */
+    .search input {
+      border-color: #c5c5c5;
+    }
+
+    .search input:focus {
+      border-color: #900021;
+    }
+
+    /* App shell badge */
+    .app-name-link {
+      font-weight: 700 !important;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">Loading SE-AMS documentation…</div>
+
+  <script>
+    window.$docsify = {
+      name: 'SE-AMS',
+      repo: 'https://github.com/Tahia-Tabassom-RUHI/SE-AMS',
+      homepage: 'README.md',
+      coverpage: '_coverpage.md',
+      loadSidebar: '_sidebar.md',
+      subMaxLevel: 2,
+      auto2top: true,
+      search: {
+        placeholder: 'Search documentation…',
+        noData: 'No results.',
+        depth: 3,
+      },
+      pagination: {
+        previousText: 'Previous',
+        nextText: 'Next',
+        crossChapter: true,
+      },
+      themeable: {
+        readyTransition: true,
+        responsiveTables: true,
+      },
+      alias: {
+        '/.*/_sidebar.md': '/_sidebar.md',
+      },
+    };
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code@2/dist/docsify-copy-code.min.js"></script>
+</body>
+</html>
