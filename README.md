@@ -382,14 +382,24 @@ https://tahia-tabassom-ruhi.github.io/SE-AMS/docs/
 
 ---
 
-## Team
+## Team Members
 
-| Name | Role |
+| Name | Project Role | Primary Subsystem |
+|---|---|---|
+| Tahia Tabassom Khan | Project Leader & UI Lead | Reporting & Academic Planning |
+| Abdelrahman Hassan | Backend Lead | User & Teaching Load Management |
+| Yibriw Binsama-ae | Database & Testing Lead | Activity Tracking & Resource Validation |
+
+The project follows a vertical-slicing approach. Each member is assigned a primary subsystem and contributes across its interface, application logic, data design, documentation, and testing. The technical lead titles describe each member's additional project-wide area of responsibility.
+
+---
+
+## Academic Supervision
+
+| Position | Name |
 |---|---|
-| Tahia Tabassom | Developer |
-
-**Email:** tabassom.khan@graduate.utm.my
-**GitHub:** https://github.com/Tahia-Tabassom-RUHI
+| Supervisor | Dr. Halinawati Bt Hirol |
+| Advisor | Dr. Zatul Alwani Binti Shaffiei |
 
 ---
 
@@ -397,8 +407,12 @@ https://tahia-tabassom-ruhi.github.io/SE-AMS/docs/
 
 - **Course:** SCSE2243 Application Development Project 1
 - **Section:** 15
+- **Semester:** Semester 2
+- **Session:** 2025/2026
+- **Group:** Group 4
 - **Institution:** Malaysia-Japan International Institute of Technology (MJIIT), Universiti Teknologi Malaysia
-- **Supervisor:** Not confirmed in repository documentation
+- **Supervisor:** Dr. Halinawati Bt Hirol
+- **Advisor:** Dr. Zatul Alwani Binti Shaffiei
 
 ---
 

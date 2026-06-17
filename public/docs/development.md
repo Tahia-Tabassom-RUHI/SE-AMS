@@ -182,3 +182,28 @@ npm run deploy
 ## TypeScript note
 
 The project uses TypeScript through Vite's type-stripping pipeline. There is no `tsconfig.json` at the repository root, which means `tsc --noEmit` type-checking is not run as part of the build. Type errors are caught only at edit time (IDE) or may surface as Vite transform warnings.
+
+---
+
+## Team Responsibilities
+
+Roles and subsystem assignments are taken from the SE-AMS Project Proposal and SRS.
+
+| Member | Technical Role | Primary Responsibility |
+|---|---|---|
+| Tahia Tabassom Khan | Project Leader & UI Lead | Reporting & Academic Planning |
+| Abdelrahman Hassan | Backend Lead | User & Teaching Load Management |
+| Yibriw Binsama-ae | Database & Testing Lead | Activity Tracking & Resource Validation |
+
+### Subsystem details
+
+**Subsystem 1 — User & Teaching Load Management** (Abdelrahman Hassan)
+Covers User Registration and Authentication, Role-Based Access Control, the Coordinator Assignment Tool, teaching workload validation, the Pending Assignment Queue, and the Lecturer assignment response workflow. The Express backend architecture for this subsystem is planned; it is not yet implemented in the current frontend prototype.
+
+**Subsystem 2 — Reporting & Academic Planning** (Tahia Tabassom Khan)
+Covers the Role-Based Dashboard, Course and Moderator Manager, Course Catalog, Staff Leave and Status management, Student reporting, and MJIIT ESE XLSX/CSV report generation. This subsystem is the primary implemented area of the current prototype.
+
+**Subsystem 3 — Activity Tracking & Resource Validation** (Yibriw Binsama-ae)
+Covers the Activity Log and ORCID Portal, Lab Resource Planner, lab capacity validation, Student Segmentation, and resource-validation testing. The MySQL persistence layer for this subsystem is planned; it is not yet implemented in the current frontend prototype.
+
+> These role descriptions describe planned project responsibilities from the SRS. They must not be read as claims that backend or database work is already complete.
