@@ -15,6 +15,7 @@ import { Progress } from './ui/progress';
 import { toast } from 'sonner';
 import { useAuth } from '../contexts/AuthContext';
 import { useAppData } from '../contexts/AppDataContext';
+import { generateXlsx, generateCsvFiles } from '../utils/reportExport';
 
 interface DataScope {
   id: string;
@@ -99,6 +100,7 @@ export function ExportReports() {
   const [fileFormat, setFileFormat] = useState('xlsx');
   const [isGenerating, setIsGenerating] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [generationStatus, setGenerationStatus] = useState('Processing data...');
   const [activeSheet, setActiveSheet] = useState<PreviewSheet>('teaching');
 
   const [dataScopes, setDataScopes] = useState<DataScope[]>([
@@ -122,53 +124,84 @@ export function ExportReports() {
       return;
     }
 
+    const delay = (ms: number) => new Promise<void>(resolve => setTimeout(resolve, ms));
+    const selectedScopeIds = selectedScopes.map(s => s.id);
+
     setIsGenerating(true);
-    setProgress(0);
+    setProgress(10);
+    setGenerationStatus('Validating selections...');
+    await delay(300);
 
-    const interval = setInterval(() => {
-      setProgress(prev => {
-        if (prev >= 100) { clearInterval(interval); return 100; }
-        return prev + 10;
-      });
-    }, 200);
+    setProgress(35);
+    setGenerationStatus('Preparing data...');
+    await delay(300);
 
-    setTimeout(() => {
-      clearInterval(interval);
-      setProgress(100);
-      setTimeout(() => {
-        setIsGenerating(false);
-        setProgress(0);
-        const selectedLabels = selectedScopes.map(scope => scope.label).join('\n');
-        const mockFile = new Blob(
-          [
-            `MJIIT ESE Mock Export\nTemplate: ${template}\nSemester: ${semester}\nSession: ${session}\nFormat: ${fileFormat}\n\nIncluded Sheets:\n${selectedLabels}\n`,
-          ],
-          { type: 'text/plain;charset=utf-8' }
-        );
-        const url = URL.createObjectURL(mockFile);
-        const anchor = document.createElement('a');
-        anchor.href = url;
-        anchor.download = `MJIIT_SE_Load_${session}_${semester}.${fileFormat === 'csv' ? 'csv' : 'txt'}`;
-        anchor.click();
-        URL.revokeObjectURL(url);
+    setProgress(65);
+    setGenerationStatus(`Generating ${fileFormat.toUpperCase()} file...`);
+    await delay(200);
+
+    try {
+      if (fileFormat === 'xlsx') {
+        generateXlsx(selectedScopeIds, semester, session);
+
+        setProgress(100);
+        setGenerationStatus('Download complete');
+        await delay(400);
+
         recordAudit({
           user: user ? `${user.firstName} ${user.lastName}` : 'Coordinator',
           action: 'Export Generated',
           status: 'Success',
-          details: `Generated mock MJIIT ESE ${fileFormat.toUpperCase()} export with ${selectedScopes.length} sheet(s)`,
+          details: `MJIIT ESE XLSX export — ${selectedScopes.length} sheet(s): ${selectedScopes.map(s => s.label).join(', ')}`,
         });
+
         toast.success(
           <div className="flex items-center gap-2">
             <CheckCircle2 className="w-5 h-5 text-green-600" />
             <div>
               <div className="font-semibold">Report Generated Successfully</div>
-              <div className="text-sm">MJIIT_SE_Load_Sem1_2025.xlsx is ready for download</div>
+              <div className="text-sm">
+                {selectedScopes.length} sheet{selectedScopes.length > 1 ? 's' : ''} exported as .xlsx
+              </div>
             </div>
           </div>,
-          { duration: 5000 }
+          { duration: 5000 },
         );
-      }, 500);
-    }, 2000);
+      } else {
+        const count = generateCsvFiles(selectedScopeIds, semester, session);
+
+        setProgress(100);
+        setGenerationStatus('Download complete');
+        await delay(400);
+
+        recordAudit({
+          user: user ? `${user.firstName} ${user.lastName}` : 'Coordinator',
+          action: 'Export Generated',
+          status: 'Success',
+          details: `MJIIT ESE CSV export — ${count} file(s): ${selectedScopes.map(s => s.label).join(', ')}`,
+        });
+
+        toast.success(
+          <div className="flex items-center gap-2">
+            <CheckCircle2 className="w-5 h-5 text-green-600" />
+            <div>
+              <div className="font-semibold">Report Generated Successfully</div>
+              <div className="text-sm">
+                {count} CSV file{count > 1 ? 's' : ''} downloaded
+              </div>
+            </div>
+          </div>,
+          { duration: 5000 },
+        );
+      }
+    } catch (err) {
+      console.error('[ExportReports] Generation error:', err);
+      toast.error('Failed to generate report. Please try again.');
+    } finally {
+      setIsGenerating(false);
+      setProgress(0);
+      setGenerationStatus('Processing data...');
+    }
   };
 
   return (
@@ -322,7 +355,7 @@ export function ExportReports() {
           {isGenerating && (
             <div className="mt-4">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-sm text-gray-600">Processing data...</span>
+                <span className="text-sm text-gray-600">{generationStatus}</span>
                 <span className="text-sm font-medium text-[#900021]">{progress}%</span>
               </div>
               <Progress value={progress} className="h-2" />
