@@ -390,7 +390,71 @@ https://tahia-tabassom-ruhi.github.io/SE-AMS/docs/
 | Abdelrahman Hassan | Backend Lead | User & Teaching Load Management |
 | Yibriw Binsama-ae | Database & Testing Lead | Activity Tracking & Resource Validation |
 
-The project follows a vertical-slicing approach. Each member is assigned a primary subsystem and contributes across its interface, application logic, data design, documentation, and testing. The technical lead titles describe each member's additional project-wide area of responsibility.
+The project follows a vertical-slicing approach. Each member owns one approved subsystem and contributes across its interface, application logic, data design, documentation, and testing. The proposal defines the primary subsystem ownership, while the implementation separates some proposal-level modules into multiple pages and components. The technical lead titles represent additional project-wide responsibilities and do not replace the approved subsystem ownership.
+
+## Subsystem Work Distribution
+
+The approved proposal defines three main subsystems. In the implemented prototype, several high-level proposal modules are represented by separate pages and components. The distribution below therefore shows both the official subsystem ownership and the implementation-level modules and use cases currently documented for each member.
+
+### Subsystem 1 — User & Teaching Load Management
+
+**Primary owner:** Abdelrahman Hassan
+
+**Implementation total:** 4 modules and 7 use cases
+
+| Implementation Module | Associated Use Cases |
+|---|---|
+| User Authentication Module | UC-01 Log In; UC-02 Log Out |
+| Coordinator Assignment Tool Module | UC-04 Assign Course Section to Lecturer; UC-05 Validate Projected Workload |
+| Lecturer Pending Assignment Queue Module | UC-18 Accept Assignment; UC-19 Decline Assignment |
+| My Courses Module | UC-20 View My Courses |
+
+This subsystem covers authentication, teaching-assignment dispatch, workload validation, Lecturer responses, and confirmed teaching assignments. The My Courses module is included here because it displays confirmed course assignments, accumulated teaching credits, and remaining workload capacity.
+
+### Subsystem 2 — Reporting & Academic Planning
+
+**Primary owner:** Tahia Tabassom Khan
+
+**Implementation total:** 7 modules and 9 use cases
+
+| Implementation Module | Associated Use Cases |
+|---|---|
+| Role-Based Dashboard Module | UC-03 View Coordinator Dashboard; UC-17 View Lecturer Dashboard |
+| Course Catalog Module | UC-09 View Course Catalog; UC-10 Add Course Section |
+| Course and Moderator Manager Module | UC-08 Manage Course Moderators |
+| Staff Leave and Status Module | UC-06 Manage Staff Leave and Status |
+| Assignment Status Board Module | UC-07 View Assignment Status Board |
+| Legacy SE Excel Export Module | UC-15 Export Reports |
+| System Audit Module | UC-16 View System Audit Log |
+
+This subsystem covers administrative dashboards, course planning, moderator management, status exemptions, assignment monitoring, institutional report export, and audit review. The Staff Leave and Status interface is currently implemented as a tab inside the Assignment Tool page, but its functional ownership remains under Reporting & Academic Planning because it implements the proposal’s Status Exemption Override module.
+
+### Subsystem 3 — Activity Tracking & Resource Validation
+
+**Primary owner:** Yibriw Binsama-ae
+
+**Implementation total:** 5 modules and 9 use cases
+
+| Implementation Module | Associated Use Cases |
+|---|---|
+| Lecturer Activity Tracker Module | UC-21 Add Activity Record; UC-22 Fetch ORCID Publications; UC-23 Edit Activity Record; UC-24 Delete Activity Record |
+| Staff Activity Tracker Module | UC-14 View Staff Activity Tracker |
+| Profile and ORCID Setup Module | UC-25 View and Update Profile and ORCID Setup |
+| Laboratory Resource Planner Module | UC-11 View Lab Resource Planner and Assign Lab; UC-12 Configure Laboratory Records |
+| Student Segmentation Module | UC-13 View Student Segmentation |
+
+This subsystem covers personal and Coordinator-facing activity records, the simulated ORCID workflow, profile and ORCID setup, laboratory-capacity validation, and student-intake segmentation.
+
+### Distribution Summary
+
+| Team Member | Primary Subsystem | Proposal-Level Modules | Implementation Modules | Use Cases |
+|---|---|---:|---:|---:|
+| Abdelrahman Hassan | User & Teaching Load Management | 3 | 4 | 7 |
+| Tahia Tabassom Khan | Reporting & Academic Planning | 4 | 7 | 9 |
+| Yibriw Binsama-ae | Activity Tracking & Resource Validation | 3 | 5 | 9 |
+| **Total** | **3 subsystems** | **10** | **16** | **25** |
+
+The proposal contains 10 high-level modules. The prototype expands several of those modules into separate implementation-level pages and components, resulting in 16 documented modules and 25 use cases. Module and use-case counts are not intended to measure effort by quantity alone: the subsystems differ in business-rule complexity, shared-state behaviour, validation requirements, and number of user interfaces.
 
 ---
 

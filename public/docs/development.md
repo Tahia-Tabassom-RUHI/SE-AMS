@@ -187,23 +187,78 @@ The project uses TypeScript through Vite's type-stripping pipeline. There is no 
 
 ## Team Responsibilities
 
-Roles and subsystem assignments are taken from the SE-AMS Project Proposal and SRS.
+Roles and subsystem assignments are taken from the approved SE-AMS Project Proposal and the implemented module structure documented in the SRS.
 
-| Member | Technical Role | Primary Responsibility |
+| Member | Technical Role | Primary Subsystem |
 |---|---|---|
 | Tahia Tabassom Khan | Project Leader & UI Lead | Reporting & Academic Planning |
 | Abdelrahman Hassan | Backend Lead | User & Teaching Load Management |
 | Yibriw Binsama-ae | Database & Testing Lead | Activity Tracking & Resource Validation |
 
-### Subsystem details
+The proposal determines the approved subsystem ownership. The implementation divides several proposal-level modules into separate pages and components, so the documentation below lists implementation-level modules and use cases without changing the approved ownership.
 
-**Subsystem 1 — User & Teaching Load Management** (Abdelrahman Hassan)
-Covers User Registration and Authentication, Role-Based Access Control, the Coordinator Assignment Tool, teaching workload validation, the Pending Assignment Queue, and the Lecturer assignment response workflow. The Express backend architecture for this subsystem is planned; it is not yet implemented in the current frontend prototype.
+### Subsystem 1 — User & Teaching Load Management
 
-**Subsystem 2 — Reporting & Academic Planning** (Tahia Tabassom Khan)
-Covers the Role-Based Dashboard, Course and Moderator Manager, Course Catalog, Staff Leave and Status management, Student reporting, and MJIIT ESE XLSX/CSV report generation. This subsystem is the primary implemented area of the current prototype.
+**Primary owner:** Abdelrahman Hassan
 
-**Subsystem 3 — Activity Tracking & Resource Validation** (Yibriw Binsama-ae)
-Covers the Activity Log and ORCID Portal, Lab Resource Planner, lab capacity validation, Student Segmentation, and resource-validation testing. The MySQL persistence layer for this subsystem is planned; it is not yet implemented in the current frontend prototype.
+**Implementation total:** 4 modules and 7 use cases
 
-> These role descriptions describe planned project responsibilities from the SRS. They must not be read as claims that backend or database work is already complete.
+| Implementation Module | Associated Use Cases |
+|---|---|
+| User Authentication Module | UC-01 Log In; UC-02 Log Out |
+| Coordinator Assignment Tool Module | UC-04 Assign Course Section to Lecturer; UC-05 Validate Projected Workload |
+| Lecturer Pending Assignment Queue Module | UC-18 Accept Assignment; UC-19 Decline Assignment |
+| My Courses Module | UC-20 View My Courses |
+
+This subsystem covers authentication, teaching-assignment dispatch, workload validation, Lecturer responses, and confirmed teaching assignments.
+
+The Backend Lead title describes Abdelrahman Hassan’s additional technical responsibility. The current `main` branch remains a frontend prototype and does not yet contain the planned Express backend.
+
+### Subsystem 2 — Reporting & Academic Planning
+
+**Primary owner:** Tahia Tabassom Khan
+
+**Implementation total:** 7 modules and 9 use cases
+
+| Implementation Module | Associated Use Cases |
+|---|---|
+| Role-Based Dashboard Module | UC-03 View Coordinator Dashboard; UC-17 View Lecturer Dashboard |
+| Course Catalog Module | UC-09 View Course Catalog; UC-10 Add Course Section |
+| Course and Moderator Manager Module | UC-08 Manage Course Moderators |
+| Staff Leave and Status Module | UC-06 Manage Staff Leave and Status |
+| Assignment Status Board Module | UC-07 View Assignment Status Board |
+| Legacy SE Excel Export Module | UC-15 Export Reports |
+| System Audit Module | UC-16 View System Audit Log |
+
+This subsystem covers administrative dashboards, course planning, moderator management, staff-status exemptions, assignment monitoring, institutional report export, and audit review.
+
+The Staff Leave and Status interface is implemented inside the Assignment Tool page, but its approved functional ownership remains under Reporting & Academic Planning because it represents the proposal’s Status Exemption Override module.
+
+### Subsystem 3 — Activity Tracking & Resource Validation
+
+**Primary owner:** Yibriw Binsama-ae
+
+**Implementation total:** 5 modules and 9 use cases
+
+| Implementation Module | Associated Use Cases |
+|---|---|
+| Lecturer Activity Tracker Module | UC-21 Add Activity Record; UC-22 Fetch ORCID Publications; UC-23 Edit Activity Record; UC-24 Delete Activity Record |
+| Staff Activity Tracker Module | UC-14 View Staff Activity Tracker |
+| Profile and ORCID Setup Module | UC-25 View and Update Profile and ORCID Setup |
+| Laboratory Resource Planner Module | UC-11 View Lab Resource Planner and Assign Lab; UC-12 Configure Laboratory Records |
+| Student Segmentation Module | UC-13 View Student Segmentation |
+
+This subsystem covers personal and Coordinator-facing activity records, the simulated ORCID workflow, profile setup, laboratory-capacity validation, and student-intake segmentation.
+
+The Database & Testing Lead title describes Yibriw Binsama-ae’s additional technical responsibility. The current `main` branch does not yet contain the planned MySQL persistence layer.
+
+### Distribution Summary
+
+| Team Member | Primary Subsystem | Proposal-Level Modules | Implementation Modules | Use Cases |
+|---|---|---:|---:|---:|
+| Abdelrahman Hassan | User & Teaching Load Management | 3 | 4 | 7 |
+| Tahia Tabassom Khan | Reporting & Academic Planning | 4 | 7 | 9 |
+| Yibriw Binsama-ae | Activity Tracking & Resource Validation | 3 | 5 | 9 |
+| **Total** | **3 subsystems** | **10** | **16** | **25** |
+
+The 10 proposal-level modules expand into 16 implementation-level modules and 25 documented use cases. These counts describe documentation structure, not effort by quantity alone. Each subsystem differs in business rules, validation complexity, state management, user-interface scope, and planned technical responsibilities.
