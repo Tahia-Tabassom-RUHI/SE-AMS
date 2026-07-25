@@ -7,6 +7,72 @@ A responsive, role-based web prototype for academic administration in the Softwa
 
 ---
 
+## Subsystem Work Distribution
+
+The approved proposal defines three main subsystems. In the implemented prototype, several high-level proposal modules are represented by separate pages and components. The distribution below therefore shows both the official subsystem ownership and the implementation-level modules and use cases currently documented for each member.
+
+### Subsystem 1 — User & Teaching Load Management
+
+**Primary owner:** Abdelrahman Hassan
+
+**Implementation total:** 4 modules and 7 use cases
+
+| Implementation Module | Associated Use Cases |
+|---|---|
+| User Authentication Module | UC-01 Log In; UC-02 Log Out |
+| Coordinator Assignment Tool Module | UC-04 Assign Course Section to Lecturer; UC-05 Validate Projected Workload |
+| Lecturer Pending Assignment Queue Module | UC-18 Accept Assignment; UC-19 Decline Assignment |
+| My Courses Module | UC-20 View My Courses |
+
+This subsystem covers authentication, teaching-assignment dispatch, workload validation, Lecturer responses, and confirmed teaching assignments. The My Courses module is included here because it displays confirmed course assignments, accumulated teaching credits, and remaining workload capacity.
+
+### Subsystem 2 — Reporting & Academic Planning
+
+**Primary owner:** Tahia Tabassom Khan
+
+**Implementation total:** 7 modules and 9 use cases
+
+| Implementation Module | Associated Use Cases |
+|---|---|
+| Role-Based Dashboard Module | UC-03 View Coordinator Dashboard; UC-17 View Lecturer Dashboard |
+| Course Catalog Module | UC-09 View Course Catalog; UC-10 Add Course Section |
+| Course and Moderator Manager Module | UC-08 Manage Course Moderators |
+| Staff Leave and Status Module | UC-06 Manage Staff Leave and Status |
+| Assignment Status Board Module | UC-07 View Assignment Status Board |
+| Legacy SE Excel Export Module | UC-15 Export Reports |
+| System Audit Module | UC-16 View System Audit Log |
+
+This subsystem covers administrative dashboards, course planning, moderator management, status exemptions, assignment monitoring, institutional report export, and audit review. The Staff Leave and Status interface is currently implemented as a tab inside the Assignment Tool page, but its functional ownership remains under Reporting & Academic Planning because it implements the proposal's Status Exemption Override module.
+
+### Subsystem 3 — Activity Tracking & Resource Validation
+
+**Primary owner:** Yibriw Binsama-ae
+
+**Implementation total:** 5 modules and 9 use cases
+
+| Implementation Module | Associated Use Cases |
+|---|---|
+| Lecturer Activity Tracker Module | UC-21 Add Activity Record; UC-22 Fetch ORCID Publications; UC-23 Edit Activity Record; UC-24 Delete Activity Record |
+| Staff Activity Tracker Module | UC-14 View Staff Activity Tracker |
+| Profile and ORCID Setup Module | UC-25 View and Update Profile and ORCID Setup |
+| Laboratory Resource Planner Module | UC-11 View Lab Resource Planner and Assign Lab; UC-12 Configure Laboratory Records |
+| Student Segmentation Module | UC-13 View Student Segmentation |
+
+This subsystem covers personal and Coordinator-facing activity records, the simulated ORCID workflow, profile and ORCID setup, laboratory-capacity validation, and student-intake segmentation.
+
+### Distribution Summary
+
+| Team Member | Primary Subsystem | Proposal-Level Modules | Implementation Modules | Use Cases |
+|---|---|---:|---:|---:|
+| Abdelrahman Hassan | User & Teaching Load Management | 3 | 4 | 7 |
+| Tahia Tabassom Khan | Reporting & Academic Planning | 4 | 7 | 9 |
+| Yibriw Binsama-ae | Activity Tracking & Resource Validation | 3 | 5 | 9 |
+| **Total** | **3 subsystems** | **10** | **16** | **25** |
+
+The proposal contains 10 high-level modules. The prototype expands several of those modules into separate implementation-level pages and components, resulting in 16 documented modules and 25 use cases. Module and use-case counts are not intended to measure effort by quantity alone: the subsystems differ in business-rule complexity, shared-state behaviour, validation requirements, and number of user interfaces.
+
+---
+
 ## Project Status
 
 | Item | Status |
@@ -392,70 +458,6 @@ https://tahia-tabassom-ruhi.github.io/SE-AMS/docs/
 
 The project follows a vertical-slicing approach. Each member owns one approved subsystem and contributes across its interface, application logic, data design, documentation, and testing. The proposal defines the primary subsystem ownership, while the implementation separates some proposal-level modules into multiple pages and components. The technical lead titles represent additional project-wide responsibilities and do not replace the approved subsystem ownership.
 
-## Subsystem Work Distribution
-
-The approved proposal defines three main subsystems. In the implemented prototype, several high-level proposal modules are represented by separate pages and components. The distribution below therefore shows both the official subsystem ownership and the implementation-level modules and use cases currently documented for each member.
-
-### Subsystem 1 — User & Teaching Load Management
-
-**Primary owner:** Abdelrahman Hassan
-
-**Implementation total:** 4 modules and 7 use cases
-
-| Implementation Module | Associated Use Cases |
-|---|---|
-| User Authentication Module | UC-01 Log In; UC-02 Log Out |
-| Coordinator Assignment Tool Module | UC-04 Assign Course Section to Lecturer; UC-05 Validate Projected Workload |
-| Lecturer Pending Assignment Queue Module | UC-18 Accept Assignment; UC-19 Decline Assignment |
-| My Courses Module | UC-20 View My Courses |
-
-This subsystem covers authentication, teaching-assignment dispatch, workload validation, Lecturer responses, and confirmed teaching assignments. The My Courses module is included here because it displays confirmed course assignments, accumulated teaching credits, and remaining workload capacity.
-
-### Subsystem 2 — Reporting & Academic Planning
-
-**Primary owner:** Tahia Tabassom Khan
-
-**Implementation total:** 7 modules and 9 use cases
-
-| Implementation Module | Associated Use Cases |
-|---|---|
-| Role-Based Dashboard Module | UC-03 View Coordinator Dashboard; UC-17 View Lecturer Dashboard |
-| Course Catalog Module | UC-09 View Course Catalog; UC-10 Add Course Section |
-| Course and Moderator Manager Module | UC-08 Manage Course Moderators |
-| Staff Leave and Status Module | UC-06 Manage Staff Leave and Status |
-| Assignment Status Board Module | UC-07 View Assignment Status Board |
-| Legacy SE Excel Export Module | UC-15 Export Reports |
-| System Audit Module | UC-16 View System Audit Log |
-
-This subsystem covers administrative dashboards, course planning, moderator management, status exemptions, assignment monitoring, institutional report export, and audit review. The Staff Leave and Status interface is currently implemented as a tab inside the Assignment Tool page, but its functional ownership remains under Reporting & Academic Planning because it implements the proposal’s Status Exemption Override module.
-
-### Subsystem 3 — Activity Tracking & Resource Validation
-
-**Primary owner:** Yibriw Binsama-ae
-
-**Implementation total:** 5 modules and 9 use cases
-
-| Implementation Module | Associated Use Cases |
-|---|---|
-| Lecturer Activity Tracker Module | UC-21 Add Activity Record; UC-22 Fetch ORCID Publications; UC-23 Edit Activity Record; UC-24 Delete Activity Record |
-| Staff Activity Tracker Module | UC-14 View Staff Activity Tracker |
-| Profile and ORCID Setup Module | UC-25 View and Update Profile and ORCID Setup |
-| Laboratory Resource Planner Module | UC-11 View Lab Resource Planner and Assign Lab; UC-12 Configure Laboratory Records |
-| Student Segmentation Module | UC-13 View Student Segmentation |
-
-This subsystem covers personal and Coordinator-facing activity records, the simulated ORCID workflow, profile and ORCID setup, laboratory-capacity validation, and student-intake segmentation.
-
-### Distribution Summary
-
-| Team Member | Primary Subsystem | Proposal-Level Modules | Implementation Modules | Use Cases |
-|---|---|---:|---:|---:|
-| Abdelrahman Hassan | User & Teaching Load Management | 3 | 4 | 7 |
-| Tahia Tabassom Khan | Reporting & Academic Planning | 4 | 7 | 9 |
-| Yibriw Binsama-ae | Activity Tracking & Resource Validation | 3 | 5 | 9 |
-| **Total** | **3 subsystems** | **10** | **16** | **25** |
-
-The proposal contains 10 high-level modules. The prototype expands several of those modules into separate implementation-level pages and components, resulting in 16 documented modules and 25 use cases. Module and use-case counts are not intended to measure effort by quantity alone: the subsystems differ in business-rule complexity, shared-state behaviour, validation requirements, and number of user interfaces.
-
 ---
 
 ## Academic Supervision
@@ -485,3 +487,249 @@ The proposal contains 10 high-level modules. The prototype expands several of th
 No open-source licence has currently been specified.
 
 This project includes components from [shadcn/ui](https://ui.shadcn.com/) used under the MIT licence, and photos from [Unsplash](https://unsplash.com) used under the Unsplash licence. See [ATTRIBUTIONS.md](ATTRIBUTIONS.md) for details.
+
+---
+
+## Module Index
+
+> Component map linking each use case to its actual source file. FrontEnd links are relative paths — click to open on GitHub. BackEnd and Database columns are planned (not yet implemented).
+
+![React](https://img.shields.io/badge/React-18.3.1-61DAFB?logo=react) ![TypeScript](https://img.shields.io/badge/TypeScript-blue?logo=typescript) ![Vite](https://img.shields.io/badge/Vite-6.3.5-646CFF?logo=vite) ![Tailwind](https://img.shields.io/badge/Tailwind_CSS-4.1.12-06B6D4?logo=tailwindcss) ![SheetJS](https://img.shields.io/badge/SheetJS-xlsx_0.18.5-green)
+
+---
+
+<h4>SUBSYSTEM 1 — USER &amp; TEACHING LOAD MANAGEMENT</h4>
+<strong>Developer: ABDELRAHMAN HASSAN</strong>
+
+<table style="border-collapse: collapse; width: 100%;">
+<thead>
+<tr>
+<th style="border: 1px solid #999; padding: 8px;">Sprint</th>
+<th style="border: 1px solid #999; padding: 8px;">Module</th>
+<th style="border: 1px solid #999; padding: 8px;">FrontEnd</th>
+<th style="border: 1px solid #999; padding: 8px;">BackEnd (Planned)</th>
+<th style="border: 1px solid #999; padding: 8px;">Database (Planned)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border: 1px solid #999; padding: 8px;">1</td>
+<td style="border: 1px solid #999; padding: 8px;">User Login Module (UC-01)</td>
+<td style="border: 1px solid #999; padding: 8px;"><ul><li><a href="./src/app/components/Login.tsx">Login.tsx</a></li></ul></td>
+<td style="border: 1px solid #999; padding: 8px;">• authRoutes.js<br>• authController.js</td>
+<td style="border: 1px solid #999; padding: 8px;">• academic_staff<br>• auth_tokens</td>
+</tr>
+<tr>
+<td style="border: 1px solid #999; padding: 8px;">1</td>
+<td style="border: 1px solid #999; padding: 8px;">User Logout &amp; Session (UC-02)</td>
+<td style="border: 1px solid #999; padding: 8px;"><ul><li><a href="./src/app/contexts/AuthContext.tsx">AuthContext.tsx</a> (logout logic)</li><li><a href="./src/app/components/ProtectedRoute.tsx">ProtectedRoute.tsx</a></li></ul></td>
+<td style="border: 1px solid #999; padding: 8px;">• authRoutes.js (logout endpoint)</td>
+<td style="border: 1px solid #999; padding: 8px;">• auth_tokens</td>
+</tr>
+<tr>
+<td style="border: 1px solid #999; padding: 8px;">2</td>
+<td style="border: 1px solid #999; padding: 8px;">Coordinator Assignment Tool (UC-04)</td>
+<td style="border: 1px solid #999; padding: 8px;"><ul><li><a href="./src/app/pages/AssignmentTool.tsx">AssignmentTool.tsx</a></li><li><a href="./src/app/components/LecturerSelector.tsx">LecturerSelector.tsx</a></li><li><a href="./src/app/components/StaffContextCard.tsx">StaffContextCard.tsx</a></li></ul></td>
+<td style="border: 1px solid #999; padding: 8px;">• assignmentRoutes.js<br>• assignmentController.js</td>
+<td style="border: 1px solid #999; padding: 8px;">• assignment_requests<br>• course_sections</td>
+</tr>
+<tr>
+<td style="border: 1px solid #999; padding: 8px;">2</td>
+<td style="border: 1px solid #999; padding: 8px;">Workload Validator Module (UC-05)</td>
+<td style="border: 1px solid #999; padding: 8px;"><ul><li><a href="./src/app/components/WorkloadGauge.tsx">WorkloadGauge.tsx</a></li><li><a href="./src/app/components/WorkloadMonitor.tsx">WorkloadMonitor.tsx</a></li><li><a href="./src/app/components/LecturerWorkloadGauge.tsx">LecturerWorkloadGauge.tsx</a></li><li><a href="./src/app/components/ValidationFlowDiagram.tsx">ValidationFlowDiagram.tsx</a></li></ul></td>
+<td style="border: 1px solid #999; padding: 8px;">• workloadValidator.js (middleware)</td>
+<td style="border: 1px solid #999; padding: 8px;">• course_sections<br>• academic_staff</td>
+</tr>
+<tr>
+<td style="border: 1px solid #999; padding: 8px;">2</td>
+<td style="border: 1px solid #999; padding: 8px;">Staff Leave &amp; Exemption (UC-06)</td>
+<td style="border: 1px solid #999; padding: 8px;"><ul><li><a href="./src/app/components/AdministrativeStatusModal.tsx">AdministrativeStatusModal.tsx</a></li><li><a href="./src/app/components/LecturerOnLeaveQueue.tsx">LecturerOnLeaveQueue.tsx</a></li></ul></td>
+<td style="border: 1px solid #999; padding: 8px;">• exemptionRoutes.js<br>• exemptionController.js</td>
+<td style="border: 1px solid #999; padding: 8px;">• staff_exemptions</td>
+</tr>
+<tr>
+<td style="border: 1px solid #999; padding: 8px;">3</td>
+<td style="border: 1px solid #999; padding: 8px;">Pending Assignment Queue (UC-18)</td>
+<td style="border: 1px solid #999; padding: 8px;"><ul><li><a href="./src/app/components/LecturerQueue.tsx">LecturerQueue.tsx</a></li><li><a href="./src/app/components/LecturerQueueContent.tsx">LecturerQueueContent.tsx</a></li><li><a href="./src/app/components/QueueTable.tsx">QueueTable.tsx</a></li></ul></td>
+<td style="border: 1px solid #999; padding: 8px;">• queueRoutes.js<br>• queueController.js</td>
+<td style="border: 1px solid #999; padding: 8px;">• assignment_requests<br>• my_courses</td>
+</tr>
+<tr>
+<td style="border: 1px solid #999; padding: 8px;">3</td>
+<td style="border: 1px solid #999; padding: 8px;">Decline Assignment Module (UC-19)</td>
+<td style="border: 1px solid #999; padding: 8px;"><ul><li><a href="./src/app/components/DeclineModal.tsx">DeclineModal.tsx</a></li></ul></td>
+<td style="border: 1px solid #999; padding: 8px;">• declineRoutes.js<br>• declineController.js</td>
+<td style="border: 1px solid #999; padding: 8px;">• assignment_requests<br>• audit_logs</td>
+</tr>
+<tr>
+<td style="border: 1px solid #999; padding: 8px;">4</td>
+<td style="border: 1px solid #999; padding: 8px;">System Audit Backend (UC-16)</td>
+<td style="border: 1px solid #999; padding: 8px;"><ul><li><a href="./src/app/components/SystemAuditLog.tsx">SystemAuditLog.tsx</a></li><li><a href="./src/app/pages/SystemAudit.tsx">SystemAudit.tsx</a></li></ul></td>
+<td style="border: 1px solid #999; padding: 8px;">• auditRoutes.js<br>• auditController.js</td>
+<td style="border: 1px solid #999; padding: 8px;">• audit_logs</td>
+</tr>
+</tbody>
+</table>
+
+---
+
+<h4>SUBSYSTEM 2 — REPORTING &amp; ACADEMIC PLANNING</h4>
+<strong>Developer: TAHIA TABASSOM KHAN</strong>
+
+<table style="border-collapse: collapse; width: 100%;">
+<thead>
+<tr>
+<th style="border: 1px solid #999; padding: 8px;">Sprint</th>
+<th style="border: 1px solid #999; padding: 8px;">Module</th>
+<th style="border: 1px solid #999; padding: 8px;">FrontEnd</th>
+<th style="border: 1px solid #999; padding: 8px;">BackEnd (Planned)</th>
+<th style="border: 1px solid #999; padding: 8px;">Database (Planned)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border: 1px solid #999; padding: 8px;">1</td>
+<td style="border: 1px solid #999; padding: 8px;">Coordinator Dashboard (UC-03)</td>
+<td style="border: 1px solid #999; padding: 8px;"><ul><li><a href="./src/app/pages/CoordinatorDashboard.tsx">CoordinatorDashboard.tsx (page)</a></li><li><a href="./src/app/components/CoordinatorDashboard.tsx">CoordinatorDashboard.tsx (component)</a></li><li><a href="./src/app/components/SummaryBar.tsx">SummaryBar.tsx</a></li></ul></td>
+<td style="border: 1px solid #999; padding: 8px;">• dashboardRoutes.js<br>• dashboardController.js</td>
+<td style="border: 1px solid #999; padding: 8px;">• assignment_requests<br>• academic_staff</td>
+</tr>
+<tr>
+<td style="border: 1px solid #999; padding: 8px;">1</td>
+<td style="border: 1px solid #999; padding: 8px;">Lecturer Dashboard (UC-17)</td>
+<td style="border: 1px solid #999; padding: 8px;"><ul><li><a href="./src/app/pages/LecturerDashboard.tsx">LecturerDashboard.tsx</a></li><li><a href="./src/app/pages/RoleDashboard.tsx">RoleDashboard.tsx</a></li></ul></td>
+<td style="border: 1px solid #999; padding: 8px;">• dashboardRoutes.js (lecturer view)</td>
+<td style="border: 1px solid #999; padding: 8px;">• my_courses<br>• assignment_requests</td>
+</tr>
+<tr>
+<td style="border: 1px solid #999; padding: 8px;">2</td>
+<td style="border: 1px solid #999; padding: 8px;">Assignment Status Board (UC-07)</td>
+<td style="border: 1px solid #999; padding: 8px;"><ul><li><a href="./src/app/components/AssignmentStatusBoard.tsx">AssignmentStatusBoard.tsx</a></li></ul></td>
+<td style="border: 1px solid #999; padding: 8px;">• statusRoutes.js<br>• statusController.js</td>
+<td style="border: 1px solid #999; padding: 8px;">• assignment_requests</td>
+</tr>
+<tr>
+<td style="border: 1px solid #999; padding: 8px;">3</td>
+<td style="border: 1px solid #999; padding: 8px;">Course &amp; Moderator Manager (UC-08)</td>
+<td style="border: 1px solid #999; padding: 8px;"><ul><li><a href="./src/app/components/CourseModeratorManager.tsx">CourseModeratorManager.tsx</a></li><li><a href="./src/app/components/ModeratorSection.tsx">ModeratorSection.tsx</a></li></ul></td>
+<td style="border: 1px solid #999; padding: 8px;">• moderatorRoutes.js<br>• moderatorController.js</td>
+<td style="border: 1px solid #999; padding: 8px;">• moderator_assignments<br>• course_sections</td>
+</tr>
+<tr>
+<td style="border: 1px solid #999; padding: 8px;">3</td>
+<td style="border: 1px solid #999; padding: 8px;">Course Catalog Viewer (UC-09)</td>
+<td style="border: 1px solid #999; padding: 8px;"><ul><li><a href="./src/app/pages/CourseCatalog.tsx">CourseCatalog.tsx</a></li><li><a href="./src/app/components/CourseSelector.tsx">CourseSelector.tsx</a></li></ul></td>
+<td style="border: 1px solid #999; padding: 8px;">• catalogRoutes.js<br>• catalogController.js</td>
+<td style="border: 1px solid #999; padding: 8px;">• course_sections</td>
+</tr>
+<tr>
+<td style="border: 1px solid #999; padding: 8px;">3</td>
+<td style="border: 1px solid #999; padding: 8px;">Add Section Module (UC-10)</td>
+<td style="border: 1px solid #999; padding: 8px;"><ul><li><a href="./src/app/components/SectionDetailsModal.tsx">SectionDetailsModal.tsx</a></li></ul></td>
+<td style="border: 1px solid #999; padding: 8px;">• catalogRoutes.js (POST /sections)</td>
+<td style="border: 1px solid #999; padding: 8px;">• course_sections</td>
+</tr>
+<tr>
+<td style="border: 1px solid #999; padding: 8px;">4</td>
+<td style="border: 1px solid #999; padding: 8px;">My Courses Module (UC-20)</td>
+<td style="border: 1px solid #999; padding: 8px;"><ul><li><a href="./src/app/components/MyCourses.tsx">MyCourses.tsx</a></li></ul></td>
+<td style="border: 1px solid #999; padding: 8px;">• courseRoutes.js<br>• courseController.js</td>
+<td style="border: 1px solid #999; padding: 8px;">• my_courses</td>
+</tr>
+<tr>
+<td style="border: 1px solid #999; padding: 8px;">4</td>
+<td style="border: 1px solid #999; padding: 8px;">Legacy Excel Export (UC-15)</td>
+<td style="border: 1px solid #999; padding: 8px;"><ul><li><a href="./src/app/components/ExportReports.tsx">ExportReports.tsx</a></li><li><a href="./src/app/utils/reportExport.ts">reportExport.ts</a></li></ul></td>
+<td style="border: 1px solid #999; padding: 8px;">• exportRoutes.js<br>• exportController.js (SheetJS)</td>
+<td style="border: 1px solid #999; padding: 8px;">• all tables (read-only)</td>
+</tr>
+</tbody>
+</table>
+
+---
+
+<h4>SUBSYSTEM 3 — ACTIVITY TRACKING &amp; RESOURCE VALIDATION</h4>
+<strong>Developer: YIBRIW BINSAMA-AE</strong>
+
+<table style="border-collapse: collapse; width: 100%;">
+<thead>
+<tr>
+<th style="border: 1px solid #999; padding: 8px;">Sprint</th>
+<th style="border: 1px solid #999; padding: 8px;">Module</th>
+<th style="border: 1px solid #999; padding: 8px;">FrontEnd</th>
+<th style="border: 1px solid #999; padding: 8px;">BackEnd (Planned)</th>
+<th style="border: 1px solid #999; padding: 8px;">Database (Planned)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border: 1px solid #999; padding: 8px;">2</td>
+<td style="border: 1px solid #999; padding: 8px;">Add Activity Module (UC-21)</td>
+<td style="border: 1px solid #999; padding: 8px;"><ul><li><a href="./src/app/components/MyActivityTracker.tsx">MyActivityTracker.tsx</a></li><li><a href="./src/app/components/AddActivityModal.tsx">AddActivityModal.tsx</a></li></ul></td>
+<td style="border: 1px solid #999; padding: 8px;">• activityRoutes.js<br>• activityController.js</td>
+<td style="border: 1px solid #999; padding: 8px;">• staff_activities</td>
+</tr>
+<tr>
+<td style="border: 1px solid #999; padding: 8px;">2</td>
+<td style="border: 1px solid #999; padding: 8px;">ORCID Fetch Integration (UC-22)</td>
+<td style="border: 1px solid #999; padding: 8px;"><ul><li><a href="./src/app/components/ProfileORCIDSetup.tsx">ProfileORCIDSetup.tsx</a></li><li><a href="./src/app/components/ResearchDrawer.tsx">ResearchDrawer.tsx</a></li></ul></td>
+<td style="border: 1px solid #999; padding: 8px;">• orcidService.js (external API call)</td>
+<td style="border: 1px solid #999; padding: 8px;">• academic_staff (orcid_id field)</td>
+</tr>
+<tr>
+<td style="border: 1px solid #999; padding: 8px;">2</td>
+<td style="border: 1px solid #999; padding: 8px;">Edit &amp; Delete Activity (UC-23, UC-24)</td>
+<td style="border: 1px solid #999; padding: 8px;"><ul><li><a href="./src/app/components/MyActivityTracker.tsx">MyActivityTracker.tsx</a></li><li><a href="./src/app/components/ActivityTracker.tsx">ActivityTracker.tsx</a></li></ul></td>
+<td style="border: 1px solid #999; padding: 8px;">• activityRoutes.js (PUT, DELETE)</td>
+<td style="border: 1px solid #999; padding: 8px;">• staff_activities</td>
+</tr>
+<tr>
+<td style="border: 1px solid #999; padding: 8px;">2</td>
+<td style="border: 1px solid #999; padding: 8px;">Profile &amp; ORCID Setup (UC-25)</td>
+<td style="border: 1px solid #999; padding: 8px;"><ul><li><a href="./src/app/components/ProfileORCIDSetup.tsx">ProfileORCIDSetup.tsx</a></li></ul></td>
+<td style="border: 1px solid #999; padding: 8px;">• profileRoutes.js<br>• profileController.js</td>
+<td style="border: 1px solid #999; padding: 8px;">• academic_staff</td>
+</tr>
+<tr>
+<td style="border: 1px solid #999; padding: 8px;">3</td>
+<td style="border: 1px solid #999; padding: 8px;">Staff Activity Tracker (UC-14)</td>
+<td style="border: 1px solid #999; padding: 8px;"><ul><li><a href="./src/app/components/StaffActivityTracker.tsx">StaffActivityTracker.tsx</a></li><li><a href="./src/app/components/ActivityLogPortal.tsx">ActivityLogPortal.tsx</a></li></ul></td>
+<td style="border: 1px solid #999; padding: 8px;">• activityRoutes.js (coordinator view)</td>
+<td style="border: 1px solid #999; padding: 8px;">• staff_activities</td>
+</tr>
+<tr>
+<td style="border: 1px solid #999; padding: 8px;">3</td>
+<td style="border: 1px solid #999; padding: 8px;">Lab Resource Planner (UC-11, UC-12)</td>
+<td style="border: 1px solid #999; padding: 8px;"><ul><li><a href="./src/app/components/LabResourcePlanner.tsx">LabResourcePlanner.tsx</a></li></ul></td>
+<td style="border: 1px solid #999; padding: 8px;">• labRoutes.js<br>• labController.js</td>
+<td style="border: 1px solid #999; padding: 8px;">• laboratories<br>• lab_allocations</td>
+</tr>
+<tr>
+<td style="border: 1px solid #999; padding: 8px;">3</td>
+<td style="border: 1px solid #999; padding: 8px;">Student Segmentation (UC-13)</td>
+<td style="border: 1px solid #999; padding: 8px;"><ul><li><a href="./src/app/components/StudentSegmentation.tsx">StudentSegmentation.tsx</a></li></ul></td>
+<td style="border: 1px solid #999; padding: 8px;">• segmentationRoutes.js</td>
+<td style="border: 1px solid #999; padding: 8px;">• student_enrollments</td>
+</tr>
+<tr>
+<td style="border: 1px solid #999; padding: 8px;">4</td>
+<td style="border: 1px solid #999; padding: 8px;">System Audit Frontend (UC-16)</td>
+<td style="border: 1px solid #999; padding: 8px;"><ul><li><a href="./src/app/components/SystemAuditLog.tsx">SystemAuditLog.tsx</a></li><li><a href="./src/app/pages/SystemAudit.tsx">SystemAudit.tsx</a></li></ul></td>
+<td style="border: 1px solid #999; padding: 8px;">• reads from auditRoutes.js (GET only)</td>
+<td style="border: 1px solid #999; padding: 8px;">• audit_logs (read-only)</td>
+</tr>
+</tbody>
+</table>
+
+---
+
+### Shared / Supporting Files
+
+These files are shared across all subsystems and do not belong to a single module.
+
+- <a href="./src/app/contexts/AppDataContext.tsx">AppDataContext.tsx</a> — Central state for staff, courses, assignments, and audit log
+- <a href="./src/app/contexts/AuthContext.tsx">AuthContext.tsx</a> — Login state, logout, role checking, localStorage auth persistence
+- <a href="./src/app/contexts/ActivityContext.tsx">ActivityContext.tsx</a> — Activity records (Research / Grant / Service) for all staff
+- <a href="./src/app/data/mockData.ts">mockData.ts</a> — Demo staff (8 records) and course/section fixtures (9 courses)
+- <a href="./src/app/utils/reportExport.ts">reportExport.ts</a> — SheetJS XLSX and CSV generation from frontend state
+- <a href="./src/app/components/ProtectedRoute.tsx">ProtectedRoute.tsx</a> — Route guard; redirects unauthenticated users to login
